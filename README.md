@@ -11,7 +11,7 @@ Add this to your `package.json` dependencies
 ```json
 {
   "dependencies": {
-    "unsplash-react": "danielam/unsplash-react"
+    "unsplash-react": "danielma/unsplash-react"
   }
 }
 ```
