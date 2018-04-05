@@ -508,8 +508,11 @@ function Photo({
     <div
       style={{
         display: "inline-block",
-        margin: 0,
         width,
+        marginTop: 0,
+        marginBottom: 12,
+        marginLeft: 0,
+        marginRight: 0,
         paddingTop: ".5em",
         paddingLeft: isFarLeft || ".5em",
       }}
@@ -573,7 +576,6 @@ function Photo({
           style={{
             color: inputGray,
             textDecoration: "none",
-            border: `1px solid currentColor`,
             lineHeight: "10px",
             marginLeft: "1em",
             padding: 2,

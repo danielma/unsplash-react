@@ -10,22 +10,11 @@ SearchIcon.propTypes = {
 
 export default function SearchIcon({ width = 32, height = 32, style = {} }) {
   return (
-    <svg width={width} height={height} style={style} viewBox="0 0 166 166">
-      <g id="Canvas" transform="translate(-8 67)">
-        <g id="Arrow">
-          <use
-            xlinkHref="#path0_stroke"
-            transform="matrix(0.707107 -0.707107 0.707107 0.707107 17 90)"
-          />
-        </g>
+    <svg width="14px" height="14px" viewBox="0 0 14 14">
+      <g>
+      	<polygon style={{ fill: "currentColor" }} points="4,10.9 8.8,6 8.8,8.5 10.3,8.5 10.3,3.5 5.3,3.5 5.3,5 7.8,5 2.9,9.8 	"/>
+      	<path style={{ fill: "currentColor" }} d="M13,0H1C0.4,0,0,0.4,0,1v12c0,0.6,0.4,1,1,1h12c0.6,0,1-0.4,1-1V1C14,0.4,13.6,0,13,0z M12.5,12.5h-11v-11h11V12.5z"/>
       </g>
-      <defs>
-        <path
-          style={{ fill: "currentColor" }}
-          id="path0_stroke"
-          d="M 213.546 8.48528C 218.233 3.79899 218.233 -3.79899 213.546 -8.48528L 137.179 -84.8528C 132.492 -89.5391 124.894 -89.5391 120.208 -84.8528C 115.522 -80.1665 115.522 -72.5685 120.208 -67.8823L 188.09 0L 120.208 67.8823C 115.522 72.5685 115.522 80.1665 120.208 84.8528C 124.894 89.5391 132.492 89.5391 137.179 84.8528L 213.546 8.48528ZM 0 12L 205.061 12L 205.061 -12L 0 -12L 0 12Z"
-        />
-      </defs>
     </svg>
   )
 }
