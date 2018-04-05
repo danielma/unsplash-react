@@ -325,7 +325,7 @@ export default class UnsplashPicker extends React.Component {
           <div
             className="p-a"
             style={{
-              bottom: -0.5,
+              bottom: 1,
               left: 0,
               right: 0,
               height: 1,
