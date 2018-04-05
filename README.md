@@ -6,8 +6,6 @@ React components to get unsplash images in your app!
 
 ## Install
 
-Add this to your `package.json` dependencies
-
 ```sh
 $ yarn add unsplash-react
 ```
