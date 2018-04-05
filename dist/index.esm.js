@@ -253,10 +253,56 @@ var number$1 = propTypes.number,
     oneOfType$1 = propTypes.oneOfType;
 
 
-SearchIcon$1.propTypes = {
+ErrorImage.propTypes = {
   width: oneOfType$1([number$1, string$1]),
   height: oneOfType$1([number$1, string$1]),
   style: object$1
+};
+
+function ErrorImage(_ref) {
+  var _ref$width = _ref.width,
+      width = _ref$width === undefined ? 143 : _ref$width,
+      _ref$height = _ref.height,
+      height = _ref$height === undefined ? 109 : _ref$height,
+      _ref$style = _ref.style;
+
+  return React.createElement(
+    "svg",
+    { width: width, height: height, viewBox: "0 0 105.597 80.577" },
+    React.createElement(
+      "g",
+      { style: { opacity: 0.6000000000000001 } },
+      React.createElement("path", { d: "M102.54,44.008A54.868,54.868,0,0,1,81.015,71.727c-9.272,5.971-19.156,7.447-30.5,4.956-11.219-2.521-22.3-7.648-31.46-12.508C9.971,59.07,2.81,54.393,1.033,47.046-.711,39.9,3.108,30,12.293,20.254,21.374,10.667,35.821,1.771,53,.307,70.062-1.411,85.737,4.279,94.726,12.58,103.947,20.923,106.493,32.285,102.54,44.008Z", style: { fill: '#e1f0f9' } })
+    ),
+    React.createElement(
+      "g",
+      { style: { opacity: 0.2 } },
+      React.createElement("path", { d: "M66.594,79.257c-8.7,1.638-17.1.125-25.777-4.367C30.632,69.553,21.251,61.734,13.664,54.67,6.206,47.388.5,41.018.683,33.461c.118-5.34,3.446-11.323,9.623-16.895", style: { fill: 'none', stroke: '#bac7d3', strokeMiterlimit: 10, strokeWidth: 1.35656762123108 + 'px' } }),
+      React.createElement("path", { d: "M99.52,56.783A55.145,55.145,0,0,1,76.763,75.974", style: { fill: 'none', stroke: '#bac7d3', strokeMiterlimit: 10, strokeWidth: 1.35656762123108 + 'px' } }),
+      React.createElement("path", { d: "M23.837,7.561a64.4,64.4,0,0,1,39.137-5.8C79.9,4.51,93.565,14.061,100.1,24.4a27.717,27.717,0,0,1,3.922,22.51", style: { fill: 'none', stroke: '#bac7d3', strokeMiterlimit: 10, strokeWidth: 1.35656762123108 + 'px' } })
+    ),
+    React.createElement("rect", { x: "35.441", y: "21.706", width: "4.473", height: "6.377", rx: "0.873", ry: "0.873", style: { fill: '#ef5043' } }),
+    React.createElement("rect", { x: "45.478", y: "19.136", width: "18.25", height: "8.946", rx: "3", ry: "3", style: { fill: '#444' } }),
+    React.createElement("rect", { x: "31.772", y: "23.609", width: "45.663", height: "31.5", rx: "3", ry: "3", style: { fill: '#565656' } }),
+    React.createElement("circle", { cx: "54.603", cy: "39.359", r: "10.909", style: { fill: '#707070' } }),
+    React.createElement("circle", { cx: "54.603", cy: "39.359", r: "6.901", style: { fill: '#dbdbdb' } }),
+    React.createElement("circle", { cx: "56.241", cy: "37.57", r: "2.827", style: { fill: '#fff' } }),
+    React.createElement("rect", { x: "66.848", y: "29.043", width: "7", height: "3.5", rx: "1.75", ry: "1.75", style: { fill: '#ffc338' } }),
+    React.createElement("circle", { cx: "75.925", cy: "52.566", r: "5.858", style: { fill: '#fff', stroke: '#ef5043', strokeMiterlimit: 10, strokeWidth: 2.7034974098205566 + 'px' } }),
+    React.createElement("line", { x1: "71.783", y1: "56.708", x2: "80.067", y2: "48.424", style: { fill: 'none', stroke: '#ef5043', strokeMiterlimit: 10, strokeWidth: 2.7034974098205566 + 'px' } })
+  );
+}
+
+var number$2 = propTypes.number,
+    object$2 = propTypes.object,
+    string$2 = propTypes.string,
+    oneOfType$2 = propTypes.oneOfType;
+
+
+SearchIcon$1.propTypes = {
+  width: oneOfType$2([number$2, string$2]),
+  height: oneOfType$2([number$2, string$2]),
+  style: object$2
 };
 
 function SearchIcon$1(_ref) {
@@ -276,8 +322,8 @@ function SearchIcon$1(_ref) {
   );
 }
 
-var string$2 = propTypes.string,
-    object$2 = propTypes.object;
+var string$3 = propTypes.string,
+    object$3 = propTypes.object;
 
 
 var blank = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
@@ -360,8 +406,8 @@ var SpinnerImg = function (_React$Component) {
 }(React.Component);
 
 SpinnerImg.propTypes = {
-  src: string$2.isRequired,
-  style: object$2
+  src: string$3.isRequired,
+  style: object$3
 };
 SpinnerImg.defaultProps = { style: {} };
 
@@ -437,7 +483,7 @@ ReactIntersectionObserver.propTypes = {
 };
 
 var shape = propTypes.shape,
-    string$3 = propTypes.string,
+    string$4 = propTypes.string,
     func$1 = propTypes.func;
 
 var BlobUploader = function (_React$Component) {
@@ -470,10 +516,10 @@ var BlobUploader = function (_React$Component) {
 
 BlobUploader.propTypes = {
   unsplashPhoto: shape({
-    id: string$3.isRequired,
+    id: string$4.isRequired,
     links: shape({
-      download: string$3.isRequired,
-      download_location: string$3.isRequired
+      download: string$4.isRequired,
+      download_location: string$4.isRequired
     }).isRequired
   }),
   downloadPhoto: func$1.isRequired,
@@ -481,7 +527,7 @@ BlobUploader.propTypes = {
   onBlobLoaded: func$1.isRequired
 };
 
-var string$4 = propTypes.string,
+var string$5 = propTypes.string,
     func$2 = propTypes.func,
     shape$1 = propTypes.shape;
 
@@ -550,17 +596,17 @@ var DataTransferUploader = function (_React$Component) {
 
 DataTransferUploader.propTypes = {
   unsplashPhoto: shape$1({
-    id: string$4.isRequired,
+    id: string$5.isRequired,
     links: shape$1({
-      download: string$4.isRequired,
-      download_location: string$4.isRequired
+      download: string$5.isRequired,
+      download_location: string$5.isRequired
     }).isRequired
   }),
   downloadPhoto: func$2.isRequired
 };
 
 var shape$2 = propTypes.shape,
-    string$5 = propTypes.string,
+    string$6 = propTypes.string,
     func$3 = propTypes.func;
 
 var Base64Uploader = function (_React$Component) {
@@ -634,10 +680,10 @@ var Base64Uploader = function (_React$Component) {
 
 Base64Uploader.propTypes = {
   unsplashPhoto: shape$2({
-    id: string$5.isRequired,
+    id: string$6.isRequired,
     links: shape$2({
-      download: string$5.isRequired,
-      download_location: string$5.isRequired
+      download: string$6.isRequired,
+      download_location: string$6.isRequired
     }).isRequired
   }),
   downloadPhoto: func$3.isRequired,
@@ -645,7 +691,7 @@ Base64Uploader.propTypes = {
 };
 
 var shape$3 = propTypes.shape,
-    string$6 = propTypes.string,
+    string$7 = propTypes.string,
     func$4 = propTypes.func;
 
 var ExternalLocationUploader = function (_React$Component) {
@@ -689,23 +735,23 @@ var ExternalLocationUploader = function (_React$Component) {
 
 ExternalLocationUploader.propTypes = {
   unsplashPhoto: shape$3({
-    id: string$6.isRequired,
+    id: string$7.isRequired,
     links: shape$3({
-      download: string$6.isRequired,
-      download_location: string$6.isRequired
+      download: string$7.isRequired,
+      download_location: string$7.isRequired
     }).isRequired
   }),
   downloadPhoto: func$4.isRequired,
   onFinishedUploading: func$4.isRequired,
-  uploadUrl: string$6.isRequired,
-  name: string$6.isRequired
+  uploadUrl: string$7.isRequired,
+  name: string$7.isRequired
 };
 
-var string$7 = propTypes.string,
+var string$8 = propTypes.string,
     func$5 = propTypes.func,
-    number$2 = propTypes.number,
+    number$3 = propTypes.number,
     bool = propTypes.bool,
-    object$3 = propTypes.object,
+    object$4 = propTypes.object,
     shape$4 = propTypes.shape;
 
 function noop() {}
@@ -727,35 +773,19 @@ var borderRadius = 3;
 var UnsplashPicker = function (_React$Component) {
   inherits(UnsplashPicker, _React$Component);
 
-  function UnsplashPicker() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
+  function UnsplashPicker(props) {
     classCallCheck(this, UnsplashPicker);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = possibleConstructorReturn(this, (UnsplashPicker.__proto__ || Object.getPrototypeOf(UnsplashPicker)).call(this, props));
 
-    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = UnsplashPicker.__proto__ || Object.getPrototypeOf(UnsplashPicker)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      unsplash: null,
-      photos: [],
-      totalPhotosCount: null,
-      isLoadingSearch: true,
-      selectedPhoto: null,
-      loadingPhoto: null,
-      search: "",
-      searchResultsWidth: null,
-      isAtBottomOfSearchResults: true,
-      page: 1,
-      error: null
-    }, _this.recalculateSearchResultsWidth = throttle(50, function () {
+    _this.recalculateSearchResultsWidth = throttle(50, function () {
       _this.setState({ searchResultsWidth: _this.searchResults.getBoundingClientRect().width });
-    }), _this.loadDefault = function () {
-      var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          _ref2$append = _ref2.append,
-          append = _ref2$append === undefined ? false : _ref2$append;
+    });
+
+    _this.loadDefault = function () {
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          _ref$append = _ref.append,
+          append = _ref$append === undefined ? false : _ref$append;
 
       var page = append ? _this.state.page : 1;
       _this.state.unsplash.listPhotos(page, _this.resultsPerPage).then(function (photos) {
@@ -771,9 +801,11 @@ var UnsplashPicker = function (_React$Component) {
       }).catch(function (e) {
         return _this.setState({ error: e.message, isLoadingSearch: false });
       });
-    }, _this.doImmediateSearch = function () {
-      var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          append = _ref3.append;
+    };
+
+    _this.doImmediateSearch = function () {
+      var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          append = _ref2.append;
 
       var _this$state = _this.state,
           search = _this$state.search,
@@ -799,10 +831,14 @@ var UnsplashPicker = function (_React$Component) {
       }).catch(function (e) {
         return _this.setState({ error: e.message, isLoadingSearch: false });
       });
-    }, _this.doDebouncedSearch = debounce(400, _this.doImmediateSearch), _this.doSearch = function () {
-      var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          _ref4$append = _ref4.append,
-          append = _ref4$append === undefined ? false : _ref4$append;
+    };
+
+    _this.doDebouncedSearch = debounce(400, _this.doImmediateSearch);
+
+    _this.doSearch = function () {
+      var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          _ref3$append = _ref3.append,
+          append = _ref3$append === undefined ? false : _ref3$append;
 
       _this.setState({ isLoadingSearch: true });
 
@@ -811,32 +847,59 @@ var UnsplashPicker = function (_React$Component) {
       } else {
         _this.doDebouncedSearch();
       }
-    }, _this.downloadPhoto = function (photo) {
+    };
+
+    _this.downloadPhoto = function (photo) {
       _this.setState({ loadingPhoto: photo });
       return _this.state.unsplash.downloadPhoto(photo).then(function (r) {
         return r.url;
       }).then(fetch).catch(function (e) {
         return _this.setState({ error: e.message, isLoadingSearch: false });
       });
-    }, _this.handleSearchChange = function (e) {
+    };
+
+    _this.handleSearchChange = function (e) {
       _this.setState({ search: e.target.value });
-    }, _this.handleSearchWrapperClick = function () {
+    };
+
+    _this.handleSearchWrapperClick = function () {
       _this.searchInput && _this.searchInput.focus();
-    }, _this.handlePhotoClick = function (photo) {
+    };
+
+    _this.handlePhotoClick = function (photo) {
       _this.setState({ selectedPhoto: photo });
-    }, _this.handleFinishedUploading = function (response) {
+    };
+
+    _this.handleFinishedUploading = function (response) {
       _this.setState({ loadingPhoto: null });
       _this.props.onFinishedUploading(response);
-    }, _this.handleSearchResultsBottomIntersectionChange = function (isAtBottomOfSearchResults) {
+    };
+
+    _this.handleSearchResultsBottomIntersectionChange = function (isAtBottomOfSearchResults) {
       _this.setState({ isAtBottomOfSearchResults: isAtBottomOfSearchResults });
 
       if (isAtBottomOfSearchResults && !_this.state.isLoadingSearch && _this.hasMoreResults) {
-        _this.setState(function (_ref5) {
-          var page = _ref5.page;
+        _this.setState(function (_ref4) {
+          var page = _ref4.page;
           return { page: page + 1 };
         });
       }
-    }, _temp), possibleConstructorReturn(_this, _ret);
+    };
+
+    _this.state = {
+      unsplash: null,
+      photos: [],
+      totalPhotosCount: null,
+      isLoadingSearch: true,
+      selectedPhoto: null,
+      loadingPhoto: null,
+      search: props.defaultSearch,
+      searchResultsWidth: null,
+      isAtBottomOfSearchResults: true,
+      page: 1,
+      error: null
+    };
+    return _this;
   }
 
   createClass(UnsplashPicker, [{
@@ -964,13 +1027,8 @@ var UnsplashPicker = function (_React$Component) {
             },
             error ? React.createElement(
               "div",
-              { style: { textAlign: "center" } },
-              React.createElement(
-                "h1",
-                null,
-                "\uD83D\uDE2D"
-              ),
-              " ",
+              { style: { textAlign: "center", marginTop: 3.5 + "em" } },
+              React.createElement(ErrorImage, null),
               React.createElement(
                 "p",
                 null,
@@ -1009,7 +1067,7 @@ var UnsplashPicker = function (_React$Component) {
           React.createElement("div", {
             className: "p-a",
             style: {
-              bottom: -0.5,
+              bottom: 1,
               left: 0,
               right: 0,
               height: 1,
@@ -1051,14 +1109,15 @@ var UnsplashPicker = function (_React$Component) {
 }(React.Component);
 
 UnsplashPicker.propTypes = {
-  accessKey: string$7.isRequired,
-  applicationName: string$7.isRequired,
-  perPage: number$2.isRequired,
+  accessKey: string$8.isRequired,
+  applicationName: string$8.isRequired,
+  perPage: number$3.isRequired,
   Uploader: func$5,
-  columns: number$2,
-  photoRatio: number$2,
-  highlightColor: string$7,
+  columns: number$3,
+  photoRatio: number$3,
+  highlightColor: string$8,
   onFinishedUploading: func$5,
+  defaultSearch: string$8,
   __debug_chaosMonkey: bool
 };
 UnsplashPicker.defaultProps = {
@@ -1068,6 +1127,7 @@ UnsplashPicker.defaultProps = {
   photoRatio: 1.5,
   highlightColor: "#00adf0",
   onFinishedUploading: noop,
+  defaultSearch: "",
   __debug_chaosMonkey: false
 };
 
@@ -1079,12 +1139,12 @@ function CSSStyles() {
   });
 }
 
-SearchInputIcon.propTypes = { isLoading: bool.isRequired, hasError: bool.isRequired, style: object$3 };
-function SearchInputIcon(_ref6) {
-  var isLoading = _ref6.isLoading,
-      hasError = _ref6.hasError,
-      style = _ref6.style,
-      rest = objectWithoutProperties(_ref6, ["isLoading", "hasError", "style"]);
+SearchInputIcon.propTypes = { isLoading: bool.isRequired, hasError: bool.isRequired, style: object$4 };
+function SearchInputIcon(_ref5) {
+  var isLoading = _ref5.isLoading,
+      hasError = _ref5.hasError,
+      style = _ref5.style,
+      rest = objectWithoutProperties(_ref5, ["isLoading", "hasError", "style"]);
 
   var searchColor = hasError ? "#D62828" : inputGray;
   var mergedStyle = _extends({ top: "0.15em", marginRight: ".5em" }, style);
@@ -1095,11 +1155,11 @@ function SearchInputIcon(_ref6) {
   );
 }
 
-AbsolutelyCentered.propTypes = { width: number$2.isRequired, height: number$2.isRequired };
-function AbsolutelyCentered(_ref7) {
-  var width = _ref7.width,
-      height = _ref7.height,
-      rest = objectWithoutProperties(_ref7, ["width", "height"]);
+AbsolutelyCentered.propTypes = { width: number$3.isRequired, height: number$3.isRequired };
+function AbsolutelyCentered(_ref6) {
+  var width = _ref6.width,
+      height = _ref6.height,
+      rest = objectWithoutProperties(_ref6, ["width", "height"]);
 
   return React.createElement("div", _extends({
     className: "p-a",
@@ -1114,15 +1174,15 @@ function AbsolutelyCentered(_ref7) {
 }
 
 OverflowFadeLink.propTypes = {
-  href: string$7.isRequired,
-  style: object$3.isRequired,
-  wrapperClassName: string$7.isRequired
+  href: string$8.isRequired,
+  style: object$4.isRequired,
+  wrapperClassName: string$8.isRequired
 };
-function OverflowFadeLink(_ref8) {
-  var wrapperClassName = _ref8.wrapperClassName,
-      _ref8$style = _ref8.style,
-      style = _ref8$style === undefined ? {} : _ref8$style,
-      rest = objectWithoutProperties(_ref8, ["wrapperClassName", "style"]);
+function OverflowFadeLink(_ref7) {
+  var wrapperClassName = _ref7.wrapperClassName,
+      _ref7$style = _ref7.style,
+      style = _ref7$style === undefined ? {} : _ref7$style,
+      rest = objectWithoutProperties(_ref7, ["wrapperClassName", "style"]);
 
   return React.createElement(
     "div",
@@ -1159,33 +1219,33 @@ function OverflowFadeLink(_ref8) {
 
 Photo.propTypes = {
   photo: shape$4({
-    id: string$7.isRequired,
+    id: string$8.isRequired,
     urls: shape$4({
-      small: string$7.isRequired
+      small: string$8.isRequired
     }).isRequired,
-    user: shape$4({ links: shape$4({ html: string$7.isRequired }).isRequired }).isRequired
+    user: shape$4({ links: shape$4({ html: string$8.isRequired }).isRequired }).isRequired
   }).isRequired,
-  width: number$2.isRequired,
-  height: number$2.isRequired,
-  index: number$2.isRequired,
-  columns: number$2.isRequired,
-  loadingPhoto: shape$4({ id: string$7.isRequired }),
-  selectedPhoto: shape$4({ id: string$7.isRequired }),
+  width: number$3.isRequired,
+  height: number$3.isRequired,
+  index: number$3.isRequired,
+  columns: number$3.isRequired,
+  loadingPhoto: shape$4({ id: string$8.isRequired }),
+  selectedPhoto: shape$4({ id: string$8.isRequired }),
   onPhotoClick: func$5.isRequired,
-  highlightColor: string$7.isRequired,
-  applicationName: string$7.isRequired
+  highlightColor: string$8.isRequired,
+  applicationName: string$8.isRequired
 };
-function Photo(_ref9) {
-  var photo = _ref9.photo,
-      width = _ref9.width,
-      height = _ref9.height,
-      index = _ref9.index,
-      columns = _ref9.columns,
-      loadingPhoto = _ref9.loadingPhoto,
-      selectedPhoto = _ref9.selectedPhoto,
-      onPhotoClick = _ref9.onPhotoClick,
-      highlightColor = _ref9.highlightColor,
-      applicationName = _ref9.applicationName;
+function Photo(_ref8) {
+  var photo = _ref8.photo,
+      width = _ref8.width,
+      height = _ref8.height,
+      index = _ref8.index,
+      columns = _ref8.columns,
+      loadingPhoto = _ref8.loadingPhoto,
+      selectedPhoto = _ref8.selectedPhoto,
+      onPhotoClick = _ref8.onPhotoClick,
+      highlightColor = _ref8.highlightColor,
+      applicationName = _ref8.applicationName;
 
   var isFarLeft = index % columns === 0;
   var loadingPhotoId = loadingPhoto && loadingPhoto.id;
