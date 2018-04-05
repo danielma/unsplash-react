@@ -299,9 +299,12 @@ export default class UnsplashPicker extends React.Component {
             ref={element => (this.searchResults = element)}
           >
             {error ? (
-              <div style={{ textAlign: "center", marginTop: `${3.5}em` }}>
+              <div
+                style={{ textAlign: "center", marginTop: "3em", padding: "0 1em", fontSize: 13 }}
+              >
                 <ErrorImage />
-                <p>{error}</p>
+                <p>We're having trouble communicating with Unsplash right now. Please try again.</p>
+                <p style={{ color: inputGray }}>{error}</p>
               </div>
             ) : (
               [
@@ -342,13 +345,13 @@ export default class UnsplashPicker extends React.Component {
           <div
             className="p-a"
             style={{
-              bottom: 1,
+              bottom: -1,
               left: 0,
               right: 0,
               height: 1,
               boxShadow:
-                isAtBottomOfSearchResults && !this.hasMoreResults
-                  ? "0 0 0 0 rgba(0, 0, 0, .2)"
+                (isAtBottomOfSearchResults && !this.hasMoreResults) || error
+                  ? "0 0 0 0 transparent"
                   : "0 0 10px 5px rgba(0, 0, 0, .2)",
               transition: "box-shadow .3s",
               zIndex: 2,
