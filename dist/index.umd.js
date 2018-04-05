@@ -2857,6 +2857,14 @@
 	      return _this2.unsplash.search.photos(search, page, perPage).then(_this2.processResponse);
 	    };
 
+	    this.getPhoto = function (id) {
+	      var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+	          width = _ref2.width,
+	          height = _ref2.height;
+
+	      return _this2.unsplash.photos.getPhoto(id, width, height).then(_this2.processResponse);
+	    };
+
 	    this.downloadPhoto = function (photo) {
 	      return _this2.unsplash.photos.downloadPhoto(photo).then(_this2.processResponse);
 	    };
@@ -4337,9 +4345,17 @@
 
 	    _this.downloadPhoto = function (photo) {
 	      _this.setState({ loadingPhoto: photo });
-	      return _this.state.unsplash.downloadPhoto(photo).then(function (r) {
+	      var preferredSize = _this.props.preferredSize;
+
+	      var download = _this.state.unsplash.downloadPhoto(photo);
+
+	      var downloadPromise = preferredSize ? _this.state.unsplash.getPhoto(photo.id, preferredSize).then(function (r) {
+	        return r.urls.custom;
+	      }) : download.then(function (r) {
 	        return r.url;
-	      }).then(fetch).catch(function (e) {
+	      });
+
+	      return downloadPromise.then(fetch).catch(function (e) {
 	        return _this.setState({ error: e.message, isLoadingSearch: false });
 	      });
 	    };
@@ -4604,6 +4620,10 @@
 	  highlightColor: string$8,
 	  onFinishedUploading: func$5,
 	  defaultSearch: string$8,
+	  preferredSize: shape$4({
+	    width: number$3.isRequired,
+	    height: number$3.isRequired
+	  }),
 	  __debug_chaosMonkey: bool
 	};
 	UnsplashPicker.defaultProps = {
@@ -4614,6 +4634,7 @@
 	  highlightColor: "#00adf0",
 	  onFinishedUploading: noop,
 	  defaultSearch: "",
+	  preferredSize: null,
 	  __debug_chaosMonkey: false
 	};
 
