@@ -3037,35 +3037,17 @@
 
 	function SearchIcon$1(_ref) {
 	  var _ref$width = _ref.width,
-	      width = _ref$width === undefined ? 32 : _ref$width,
 	      _ref$height = _ref.height,
-	      height = _ref$height === undefined ? 32 : _ref$height,
-	      _ref$style = _ref.style,
-	      style = _ref$style === undefined ? {} : _ref$style;
+	      _ref$style = _ref.style;
 
 	  return react.createElement(
 	    "svg",
-	    { width: width, height: height, style: style, viewBox: "0 0 166 166" },
+	    { width: "14px", height: "14px", viewBox: "0 0 14 14" },
 	    react.createElement(
 	      "g",
-	      { id: "Canvas", transform: "translate(-8 67)" },
-	      react.createElement(
-	        "g",
-	        { id: "Arrow" },
-	        react.createElement("use", {
-	          xlinkHref: "#path0_stroke",
-	          transform: "matrix(0.707107 -0.707107 0.707107 0.707107 17 90)"
-	        })
-	      )
-	    ),
-	    react.createElement(
-	      "defs",
 	      null,
-	      react.createElement("path", {
-	        style: { fill: "currentColor" },
-	        id: "path0_stroke",
-	        d: "M 213.546 8.48528C 218.233 3.79899 218.233 -3.79899 213.546 -8.48528L 137.179 -84.8528C 132.492 -89.5391 124.894 -89.5391 120.208 -84.8528C 115.522 -80.1665 115.522 -72.5685 120.208 -67.8823L 188.09 0L 120.208 67.8823C 115.522 72.5685 115.522 80.1665 120.208 84.8528C 124.894 89.5391 132.492 89.5391 137.179 84.8528L 213.546 8.48528ZM 0 12L 205.061 12L 205.061 -12L 0 -12L 0 12Z"
-	      })
+	      react.createElement("polygon", { style: { fill: "currentColor" }, points: "4,10.9 8.8,6 8.8,8.5 10.3,8.5 10.3,3.5 5.3,3.5 5.3,5 7.8,5 2.9,9.8 \t" }),
+	      react.createElement("path", { style: { fill: "currentColor" }, d: "M13,0H1C0.4,0,0,0.4,0,1v12c0,0.6,0.4,1,1,1h12c0.6,0,1-0.4,1-1V1C14,0.4,13.6,0,13,0z M12.5,12.5h-11v-11h11V12.5z" })
 	    )
 	  );
 	}
@@ -4706,8 +4688,11 @@
 	    {
 	      style: {
 	        display: "inline-block",
-	        margin: 0,
 	        width: width,
+	        marginTop: 0,
+	        marginBottom: 12,
+	        marginLeft: 0,
+	        marginRight: 0,
 	        paddingTop: ".5em",
 	        paddingLeft: isFarLeft || ".5em"
 	      },
@@ -4780,7 +4765,6 @@
 	          style: {
 	            color: inputGray,
 	            textDecoration: "none",
-	            border: "1px solid currentColor",
 	            lineHeight: "10px",
 	            marginLeft: "1em",
 	            padding: 2,
