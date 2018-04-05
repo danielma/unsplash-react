@@ -36,29 +36,27 @@ export default class UnsplashPicker extends React.Component {
   static propTypes = {
     accessKey: string.isRequired,
     applicationName: string.isRequired,
-    perPage: number.isRequired,
-    Uploader: func,
     columns: number,
-    photoRatio: number,
+    defaultSearch: string,
     highlightColor: string,
     onFinishedUploading: func,
-    defaultSearch: string,
+    photoRatio: number,
     preferredSize: shape({
       width: number.isRequired,
       height: number.isRequired,
     }),
+    Uploader: func,
     __debug_chaosMonkey: bool,
   }
 
   static defaultProps = {
-    Uploader: Base64Uploader,
-    perPage: 12,
     columns: 3,
-    photoRatio: 1.5,
+    defaultSearch: "",
     highlightColor: "#00adf0",
     onFinishedUploading: noop,
-    defaultSearch: "",
+    photoRatio: 1.5,
     preferredSize: null,
+    Uploader: Base64Uploader,
     __debug_chaosMonkey: false,
   }
 
