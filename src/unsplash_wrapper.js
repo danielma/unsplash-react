@@ -36,6 +36,10 @@ export default class UnsplashWrapper {
     return this.unsplash.search.photos(search, page, perPage).then(this.processResponse)
   }
 
+  getPhoto = (id, { width, height } = {}) => {
+    return this.unsplash.photos.getPhoto(id, width, height).then(this.processResponse)
+  }
+
   downloadPhoto = photo => {
     return this.unsplash.photos.downloadPhoto(photo).then(this.processResponse)
   }

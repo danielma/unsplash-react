@@ -17,6 +17,7 @@ function Base64Example() {
           Uploader={withDefaultProps(Base64Uploader, { name: "group[image]" })}
           columns={3}
           photoRatio={3 / 2}
+          preferredSize={{ width: 1024, height: 768 }}
         />
       </div>
 

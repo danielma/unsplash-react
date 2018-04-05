@@ -43,6 +43,10 @@ export default class UnsplashPicker extends React.Component {
     highlightColor: string,
     onFinishedUploading: func,
     defaultSearch: string,
+    preferredSize: shape({
+      width: number.isRequired,
+      height: number.isRequired,
+    }),
     __debug_chaosMonkey: bool,
   }
 
@@ -54,6 +58,7 @@ export default class UnsplashPicker extends React.Component {
     highlightColor: "#00adf0",
     onFinishedUploading: noop,
     defaultSearch: "",
+    preferredSize: null,
     __debug_chaosMonkey: false,
   }
 
@@ -172,9 +177,14 @@ export default class UnsplashPicker extends React.Component {
 
   downloadPhoto = photo => {
     this.setState({ loadingPhoto: photo })
-    return this.state.unsplash
-      .downloadPhoto(photo)
-      .then(r => r.url)
+    const { preferredSize } = this.props
+    const download = this.state.unsplash.downloadPhoto(photo)
+
+    const downloadPromise = preferredSize
+      ? this.state.unsplash.getPhoto(photo.id, preferredSize).then(r => r.urls.custom)
+      : download.then(r => r.url)
+
+    return downloadPromise
       .then(fetch)
       .catch(e => this.setState({ error: e.message, isLoadingSearch: false }))
   }
