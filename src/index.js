@@ -3,6 +3,7 @@ import UnsplashWrapper from "./unsplash_wrapper"
 import Spinner from "react-svg-spinner"
 import propTypes from "prop-types"
 import SearchIcon from "./search_icon"
+import ErrorImage from "./error_image"
 import ArrowIcon from "./arrow_icon"
 import SpinnerImg from "./spinner_img"
 import ReactIntersectionObserver from "./react_intersection_observer.js"
@@ -282,8 +283,8 @@ export default class UnsplashPicker extends React.Component {
             ref={element => (this.searchResults = element)}
           >
             {error ? (
-              <div style={{ textAlign: "center" }}>
-                <h1>😭</h1> <p>{error}</p>
+              <div style={{ textAlign: "center", marginTop: 3.5 + 'em' }}>
+                <ErrorImage /><p>{error}</p>
               </div>
             ) : (
               [
