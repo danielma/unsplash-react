@@ -1,4 +1,4 @@
-# master
+# v0.1.6
 
 - Improve error state messaging
 

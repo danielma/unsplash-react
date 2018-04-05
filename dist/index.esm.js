@@ -755,12 +755,56 @@ ExternalLocationUploader.propTypes = {
   name: string$7.isRequired
 };
 
-var string$8 = propTypes.string,
-    func$5 = propTypes.func,
+var shape$4 = propTypes.shape,
+    string$8 = propTypes.string,
+    func$5 = propTypes.func;
+
+var InsertIntoApplicationUploader = function (_React$Component) {
+  inherits(InsertIntoApplicationUploader, _React$Component);
+
+  function InsertIntoApplicationUploader() {
+    classCallCheck(this, InsertIntoApplicationUploader);
+    return possibleConstructorReturn(this, (InsertIntoApplicationUploader.__proto__ || Object.getPrototypeOf(InsertIntoApplicationUploader)).apply(this, arguments));
+  }
+
+  createClass(InsertIntoApplicationUploader, [{
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      var prevPhoto = this.props.unsplashPhoto;
+      var nextPhoto = nextProps.unsplashPhoto;
+      if ((prevPhoto && prevPhoto.id) === (nextPhoto && nextPhoto.id)) return;
+
+      nextProps.downloadPhoto(nextPhoto).then(function (r) {
+        return r.url;
+      }).then(this.props.onFinishedUploading);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return null;
+    }
+  }]);
+  return InsertIntoApplicationUploader;
+}(React.Component);
+
+InsertIntoApplicationUploader.propTypes = {
+  unsplashPhoto: shape$4({
+    id: string$8.isRequired,
+    links: shape$4({
+      download: string$8.isRequired,
+      download_location: string$8.isRequired
+    }).isRequired
+  }),
+  downloadPhoto: func$5.isRequired,
+  onFinishedUploading: func$5.isRequired
+};
+
+var string$9 = propTypes.string,
+    func$6 = propTypes.func,
     number$3 = propTypes.number,
     bool = propTypes.bool,
     object$4 = propTypes.object,
-    shape$4 = propTypes.shape;
+    shape$5 = propTypes.shape;
 
 function noop() {}
 
@@ -1043,11 +1087,18 @@ var UnsplashPicker = function (_React$Component) {
             },
             error ? React.createElement(
               "div",
-              { style: { textAlign: "center", marginTop: 3.5 + "em" } },
+              {
+                style: { textAlign: "center", marginTop: "3em", padding: "0 1em", fontSize: 13 }
+              },
               React.createElement(ErrorImage, null),
               React.createElement(
                 "p",
                 null,
+                "We're having trouble communicating with Unsplash right now. Please try again."
+              ),
+              React.createElement(
+                "p",
+                { style: { color: inputGray } },
                 error
               )
             ) : [photos.map(function (photo, index) {
@@ -1083,11 +1134,11 @@ var UnsplashPicker = function (_React$Component) {
           React.createElement("div", {
             className: "p-a",
             style: {
-              bottom: 1,
+              bottom: -1,
               left: 0,
               right: 0,
               height: 1,
-              boxShadow: isAtBottomOfSearchResults && !this.hasMoreResults ? "0 0 0 0 rgba(0, 0, 0, .2)" : "0 0 10px 5px rgba(0, 0, 0, .2)",
+              boxShadow: isAtBottomOfSearchResults && !this.hasMoreResults || error ? "0 0 0 0 transparent" : "0 0 10px 5px rgba(0, 0, 0, .2)",
               transition: "box-shadow .3s",
               zIndex: 2
             }
@@ -1125,30 +1176,28 @@ var UnsplashPicker = function (_React$Component) {
 }(React.Component);
 
 UnsplashPicker.propTypes = {
-  accessKey: string$8.isRequired,
-  applicationName: string$8.isRequired,
-  perPage: number$3.isRequired,
-  Uploader: func$5,
+  accessKey: string$9.isRequired,
+  applicationName: string$9.isRequired,
   columns: number$3,
+  defaultSearch: string$9,
+  highlightColor: string$9,
+  onFinishedUploading: func$6,
   photoRatio: number$3,
-  highlightColor: string$8,
-  onFinishedUploading: func$5,
-  defaultSearch: string$8,
-  preferredSize: shape$4({
+  preferredSize: shape$5({
     width: number$3.isRequired,
     height: number$3.isRequired
   }),
+  Uploader: func$6,
   __debug_chaosMonkey: bool
 };
 UnsplashPicker.defaultProps = {
-  Uploader: Base64Uploader,
-  perPage: 12,
   columns: 3,
-  photoRatio: 1.5,
+  defaultSearch: "",
   highlightColor: "#00adf0",
   onFinishedUploading: noop,
-  defaultSearch: "",
+  photoRatio: 1.5,
   preferredSize: null,
+  Uploader: Base64Uploader,
   __debug_chaosMonkey: false
 };
 
@@ -1195,9 +1244,9 @@ function AbsolutelyCentered(_ref6) {
 }
 
 OverflowFadeLink.propTypes = {
-  href: string$8.isRequired,
+  href: string$9.isRequired,
   style: object$4.isRequired,
-  wrapperClassName: string$8.isRequired
+  wrapperClassName: string$9.isRequired
 };
 function OverflowFadeLink(_ref7) {
   var wrapperClassName = _ref7.wrapperClassName,
@@ -1239,22 +1288,22 @@ function OverflowFadeLink(_ref7) {
 }
 
 Photo.propTypes = {
-  photo: shape$4({
-    id: string$8.isRequired,
-    urls: shape$4({
-      small: string$8.isRequired
+  photo: shape$5({
+    id: string$9.isRequired,
+    urls: shape$5({
+      small: string$9.isRequired
     }).isRequired,
-    user: shape$4({ links: shape$4({ html: string$8.isRequired }).isRequired }).isRequired
+    user: shape$5({ links: shape$5({ html: string$9.isRequired }).isRequired }).isRequired
   }).isRequired,
   width: number$3.isRequired,
   height: number$3.isRequired,
   index: number$3.isRequired,
   columns: number$3.isRequired,
-  loadingPhoto: shape$4({ id: string$8.isRequired }),
-  selectedPhoto: shape$4({ id: string$8.isRequired }),
-  onPhotoClick: func$5.isRequired,
-  highlightColor: string$8.isRequired,
-  applicationName: string$8.isRequired
+  loadingPhoto: shape$5({ id: string$9.isRequired }),
+  selectedPhoto: shape$5({ id: string$9.isRequired }),
+  onPhotoClick: func$6.isRequired,
+  highlightColor: string$9.isRequired,
+  applicationName: string$9.isRequired
 };
 function Photo(_ref8) {
   var photo = _ref8.photo,
@@ -1373,4 +1422,4 @@ function Photo(_ref8) {
 }
 
 export default UnsplashPicker;
-export { Base64Uploader, ExternalLocationUploader, DataTransferUploader, BlobUploader, withDefaultProps };
+export { Base64Uploader, ExternalLocationUploader, DataTransferUploader, BlobUploader, InsertIntoApplicationUploader, withDefaultProps };
