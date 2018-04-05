@@ -5,6 +5,7 @@ import UnsplashReact, {
   Base64Uploader,
   ExternalLocationUploader,
   BlobUploader,
+  InsertIntoApplicationUploader,
 } from "../src/"
 
 function Base64Example() {
@@ -96,7 +97,38 @@ class AjaxExample extends React.Component {
   }
 }
 
-const EXAMPLE_TYPES = ["base64", "aws", "ajax"]
+class InsertIntoApplicationExample extends React.Component {
+  state = { imageUrl: null }
+
+  handleFinishedUploading = imageUrl => {
+    this.setState({ imageUrl })
+  }
+
+  render() {
+    const { imageUrl } = this.state
+
+    return (
+      <div style={{ display: "flex" }}>
+        <div style={{ height: "350px", width: "450px" }}>
+          <UnsplashReact
+            accessKey={process.env.UNSPLASH_ACCESS_KEY}
+            applicationName="unsplash_react"
+            Uploader={InsertIntoApplicationUploader}
+            photoRatio={16 / 9}
+            preferredSize={{ width: 800, height: 450 }}
+            onFinishedUploading={this.handleFinishedUploading}
+          />
+        </div>
+
+        <div>
+          <img src={imageUrl} />
+        </div>
+      </div>
+    )
+  }
+}
+
+const EXAMPLE_TYPES = ["base64", "aws", "ajax", "insert_into_application"]
 
 class ExampleComponent extends React.Component {
   state = {
@@ -110,7 +142,7 @@ class ExampleComponent extends React.Component {
   render() {
     const { exampleType } = this.state
     return (
-      <div style={{ width: "450px" }}>
+      <div style={{ width: exampleType === "insert_into_application" ? "" : "450px" }}>
         <div
           style={{ paddingBottom: "1rem", marginBottom: "1rem", borderBottom: "2px solid gray" }}
         >
@@ -127,6 +159,8 @@ class ExampleComponent extends React.Component {
           <AWSExample />
         ) : exampleType === "ajax" ? (
           <AjaxExample />
+        ) : exampleType === "insert_into_application" ? (
+          <InsertIntoApplicationExample />
         ) : (
           <div>Unknown example {this.state.exampleType}</div>
         )}

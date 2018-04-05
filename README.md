@@ -46,6 +46,20 @@ This is accomplished through the `Uploader` prop, which is a React component tha
 
 Please see the <a href="examples">examples</a> directory for more information, and don't hesitate to <a href="issues">open an issue</a> if you need help.
 
+### Try it out locally!
+
+You'll need to [create an application with Unsplash](https://unsplash.com/developers) and get an access key to demo the components.
+
+Once you have the access key, follow these steps.
+
+```sh
+$ git clone https://github.com/danielma/react-unsplash
+$ cd react-unsplash
+$ yarn
+$ UNSPLASH_ACCESS_KEY=key yarn run dev
+$ open http://localhost:10001/
+```
+
 ## `<UnsplashReact />` Props
 
 name                  | type                       | required | default   | description
@@ -89,5 +103,9 @@ The `DataTransferUploader` uses experimental APIs only available (as of writing)
 The `ExternalLocationUploader` downloads the selected unsplash photo, and then executes a `POST` request to `uploadUrl`. It then calls `this.props.onFinishedUploading` with the `Promise<Response>` of that request.
 
 The key example usage for this is direct to S3 upload. You can provide and `uploadUrl`, and after the photo is uploaded, you can save the bucket URL on your server.
+
+### `InsertIntoApplicationUploader`
+
+The `InsertIntoApplicationUploader` calls `onFinishedUploading` with the URL of the photo to download. This can be used to insert the photo directly into your application.
 
 ## Contributions welcome! :smile:

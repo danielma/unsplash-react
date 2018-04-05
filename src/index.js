@@ -15,6 +15,7 @@ import BlobUploader from "./uploaders/blob_uploader"
 import DataTransferUploader from "./uploaders/data_transfer_uploader"
 import Base64Uploader from "./uploaders/base64_uploader"
 import ExternalLocationUploader from "./uploaders/external_location_uploader"
+import InsertIntoApplicationUploader from "./uploaders/insert_into_application_uploader"
 
 function noop() {}
 
@@ -372,6 +373,7 @@ export {
   ExternalLocationUploader,
   DataTransferUploader,
   BlobUploader,
+  InsertIntoApplicationUploader,
   withDefaultProps,
 }
 
