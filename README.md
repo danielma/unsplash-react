@@ -8,12 +8,8 @@ React components to get unsplash images in your app!
 
 Add this to your `package.json` dependencies
 
-```json
-{
-  "dependencies": {
-    "unsplash-react": "~1"
-  }
-}
+```sh
+$ yarn add unsplash-react
 ```
 
 ## Usage
