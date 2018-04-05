@@ -1,0 +1,3 @@
+# master
+
+- Add `defaultSearch` prop

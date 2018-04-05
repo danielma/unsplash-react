@@ -42,6 +42,7 @@ export default class UnsplashPicker extends React.Component {
     photoRatio: number,
     highlightColor: string,
     onFinishedUploading: func,
+    defaultSearch: string,
     __debug_chaosMonkey: bool,
   }
 
@@ -52,21 +53,26 @@ export default class UnsplashPicker extends React.Component {
     photoRatio: 1.5,
     highlightColor: "#00adf0",
     onFinishedUploading: noop,
+    defaultSearch: "",
     __debug_chaosMonkey: false,
   }
 
-  state = {
-    unsplash: null,
-    photos: [],
-    totalPhotosCount: null,
-    isLoadingSearch: true,
-    selectedPhoto: null,
-    loadingPhoto: null,
-    search: "",
-    searchResultsWidth: null,
-    isAtBottomOfSearchResults: true,
-    page: 1,
-    error: null,
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      unsplash: null,
+      photos: [],
+      totalPhotosCount: null,
+      isLoadingSearch: true,
+      selectedPhoto: null,
+      loadingPhoto: null,
+      search: props.defaultSearch,
+      searchResultsWidth: null,
+      isAtBottomOfSearchResults: true,
+      page: 1,
+      error: null,
+    }
   }
 
   componentDidMount() {
@@ -283,8 +289,9 @@ export default class UnsplashPicker extends React.Component {
             ref={element => (this.searchResults = element)}
           >
             {error ? (
-              <div style={{ textAlign: "center", marginTop: 3.5 + 'em' }}>
-                <ErrorImage /><p>{error}</p>
+              <div style={{ textAlign: "center", marginTop: `${3.5}em` }}>
+                <ErrorImage />
+                <p>{error}</p>
               </div>
             ) : (
               [
