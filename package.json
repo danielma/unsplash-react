@@ -40,7 +40,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "rollup -c -w",
     "build": "NODE_ENV=production rollup -c",
-    "release": "release-it"
+    "release": "release-it",
+    "prepublish": "build"
   },
   "repository": {
     "type": "git",
@@ -49,6 +50,9 @@
   "keywords": [
     "unsplash",
     "react"
+  ],
+  "files": [
+    "dist"
   ],
   "author": "Daniel Ma",
   "license": "ISC",
