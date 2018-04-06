@@ -313,13 +313,13 @@ var number$2 = propTypes.number,
     oneOfType$2 = propTypes.oneOfType;
 
 
-SearchIcon$1.propTypes = {
+ArrowIcon.propTypes = {
   width: oneOfType$2([number$2, string$2]),
   height: oneOfType$2([number$2, string$2]),
   style: object$2
 };
 
-function SearchIcon$1(_ref) {
+function ArrowIcon(_ref) {
   var _ref$width = _ref.width,
       _ref$height = _ref.height,
       _ref$style = _ref.style;
@@ -1421,7 +1421,7 @@ function Photo(_ref8) {
             borderRadius: borderRadius - 1
           }
         },
-        React.createElement(SearchIcon$1, { width: 10, height: 10 })
+        React.createElement(ArrowIcon, { width: 10, height: 10 })
       )
     )
   );

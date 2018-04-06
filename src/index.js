@@ -603,7 +603,7 @@ function Photo({
             borderRadius: borderRadius - 1,
           }}
         >
-          <ArrowIcon width={10} height={10} />
+          <ArrowIcon width={14} height={14} />
         </a>
       </div>
     </div>
