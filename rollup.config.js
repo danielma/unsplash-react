@@ -33,10 +33,10 @@ if (env === "production") {
   ]
 } else {
   config = {
-    input: "example/index.js",
+    input: "examples/index.js",
     output: {
       name: "UnsplashReactExample",
-      file: "example/build.js",
+      file: "examples/build.js",
       format: "umd",
       sourcemap: "inline",
     },
@@ -48,8 +48,8 @@ if (env === "production") {
       }),
       babelPlugin,
       commonjs(),
-      serve("example"),
-      livereload("example"),
+      serve("examples"),
+      livereload("examples"),
     ],
   }
 }
