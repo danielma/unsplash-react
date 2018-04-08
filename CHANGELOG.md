@@ -1,3 +1,8 @@
+# v0.1.8 (2018-04-07)
+
+- Fix examples dir https://github.com/danielma/unsplash-react/pull/2
+- Fix `ArrowIcon` name https://github.com/danielma/unsplash-react/pull/3
+
 # v0.1.6
 
 - Improve error state messaging
