@@ -136,6 +136,12 @@ export default class UnsplashPicker extends React.Component {
       .catch(e => this.setState({ error: e.message, isLoadingSearch: false }))
   }
 
+  utmLink = url => {
+    const { applicationName } = this.props
+    const utmParams = `utm_source=${applicationName}&utm_medium=referral`
+    return `${url}?${utmParams}`
+  }
+
   doImmediateSearch = ({ append } = {}) => {
     const { search, unsplash } = this.state
 
@@ -230,13 +236,7 @@ export default class UnsplashPicker extends React.Component {
   }
 
   render() {
-    const {
-      Uploader,
-      columns: searchResultColumns,
-      photoRatio,
-      highlightColor,
-      applicationName,
-    } = this.props
+    const { Uploader, columns: searchResultColumns, photoRatio, highlightColor } = this.props
     const {
       photos,
       search,
@@ -271,7 +271,11 @@ export default class UnsplashPicker extends React.Component {
           }}
         >
           Photos provided by{" "}
-          <a href="https://unsplash.com/" target="_blank" style={{ color: inputGray }}>
+          <a
+            href={this.utmLink("https://unsplash.com/")}
+            target="_blank"
+            style={{ color: inputGray }}
+          >
             Unsplash
           </a>
         </span>
@@ -333,7 +337,7 @@ export default class UnsplashPicker extends React.Component {
                     selectedPhoto={selectedPhoto}
                     onPhotoClick={this.handlePhotoClick}
                     highlightColor={highlightColor}
-                    applicationName={applicationName}
+                    utmLink={this.utmLink}
                   />
                 )),
 
@@ -517,7 +521,7 @@ Photo.propTypes = {
   selectedPhoto: shape({ id: string.isRequired }),
   onPhotoClick: func.isRequired,
   highlightColor: string.isRequired,
-  applicationName: string.isRequired,
+  utmLink: func.isRequired,
 }
 function Photo({
   photo,
@@ -529,14 +533,13 @@ function Photo({
   selectedPhoto,
   onPhotoClick,
   highlightColor,
-  applicationName,
+  utmLink,
 }) {
   const isFarLeft = index % columns === 0
   const loadingPhotoId = loadingPhoto && loadingPhoto.id
   const selectedPhotoId = selectedPhoto && selectedPhoto.id
   const isSelectedAndLoaded = loadingPhotoId === null && selectedPhotoId === photo.id
   const borderWidth = 3
-  const utmParams = `utm_source=${applicationName}&utm_medium=referral`
   const onClick = () => onPhotoClick(photo)
 
   return (
@@ -598,7 +601,7 @@ function Photo({
       </div>
       <div className="d-f" style={{ padding: `.15em ${borderWidth}px 0 ${borderWidth}px` }}>
         <OverflowFadeLink
-          href={`${photo.user.links.html}?${utmParams}`}
+          href={utmLink(photo.user.links.html)}
           target="_blank"
           style={{ color: inputGray }}
           wrapperClassName="f-1"
@@ -606,7 +609,7 @@ function Photo({
           {photo.user.name}
         </OverflowFadeLink>
         <a
-          href={`${photo.links.html}?${utmParams}`}
+          href={utmLink(photo.links.html)}
           target="_blank"
           style={{
             color: inputGray,

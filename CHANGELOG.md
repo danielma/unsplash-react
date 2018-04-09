@@ -1,3 +1,7 @@
+# master (unreleased)
+
+- make sure _all_ links to unsplash have utm params
+
 # v0.1.9 (2018-04-09)
 
 - Always credit unsplash above the search box https://github.com/danielma/unsplash-react/commit/c482199be3a7def90890fd2a7b8d129cf61c5d06
