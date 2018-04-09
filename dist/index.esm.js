@@ -943,6 +943,13 @@ var UnsplashPicker = function (_React$Component) {
       });
     };
 
+    _this.utmLink = function (url) {
+      var applicationName = _this.props.applicationName;
+
+      var utmParams = "utm_source=" + applicationName + "&utm_medium=referral";
+      return url + "?" + utmParams;
+    };
+
     _this.doImmediateSearch = function () {
       var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
           append = _ref2.append;
@@ -1100,8 +1107,7 @@ var UnsplashPicker = function (_React$Component) {
           Uploader = _props.Uploader,
           searchResultColumns = _props.columns,
           photoRatio = _props.photoRatio,
-          highlightColor = _props.highlightColor,
-          applicationName = _props.applicationName;
+          highlightColor = _props.highlightColor;
       var _state2 = this.state,
           photos = _state2.photos,
           search = _state2.search,
@@ -1140,7 +1146,11 @@ var UnsplashPicker = function (_React$Component) {
           " ",
           React.createElement(
             "a",
-            { href: "https://unsplash.com/", target: "_blank", style: { color: inputGray } },
+            {
+              href: this.utmLink("https://unsplash.com/"),
+              target: "_blank",
+              style: { color: inputGray }
+            },
             "Unsplash"
           )
         ),
@@ -1220,7 +1230,7 @@ var UnsplashPicker = function (_React$Component) {
                 selectedPhoto: selectedPhoto,
                 onPhotoClick: _this2.handlePhotoClick,
                 highlightColor: highlightColor,
-                applicationName: applicationName
+                utmLink: _this2.utmLink
               });
             }), this.searchResults && React.createElement(
               ReactIntersectionObserver,
@@ -1410,7 +1420,7 @@ Photo.propTypes = {
   selectedPhoto: shape$5({ id: string$9.isRequired }),
   onPhotoClick: func$6.isRequired,
   highlightColor: string$9.isRequired,
-  applicationName: string$9.isRequired
+  utmLink: func$6.isRequired
 };
 function Photo(_ref8) {
   var photo = _ref8.photo,
@@ -1422,14 +1432,13 @@ function Photo(_ref8) {
       selectedPhoto = _ref8.selectedPhoto,
       onPhotoClick = _ref8.onPhotoClick,
       highlightColor = _ref8.highlightColor,
-      applicationName = _ref8.applicationName;
+      utmLink = _ref8.utmLink;
 
   var isFarLeft = index % columns === 0;
   var loadingPhotoId = loadingPhoto && loadingPhoto.id;
   var selectedPhotoId = selectedPhoto && selectedPhoto.id;
   var isSelectedAndLoaded = loadingPhotoId === null && selectedPhotoId === photo.id;
   var borderWidth = 3;
-  var utmParams = "utm_source=" + applicationName + "&utm_medium=referral";
   var onClick = function onClick() {
     return onPhotoClick(photo);
   };
@@ -1501,7 +1510,7 @@ function Photo(_ref8) {
       React.createElement(
         OverflowFadeLink,
         {
-          href: photo.user.links.html + "?" + utmParams,
+          href: utmLink(photo.user.links.html),
           target: "_blank",
           style: { color: inputGray },
           wrapperClassName: "f-1"
@@ -1511,7 +1520,7 @@ function Photo(_ref8) {
       React.createElement(
         "a",
         {
-          href: photo.links.html + "?" + utmParams,
+          href: utmLink(photo.links.html),
           target: "_blank",
           style: {
             color: inputGray,
