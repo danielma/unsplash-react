@@ -4612,6 +4612,25 @@
 	        },
 	        react.createElement(CSSStyles, null),
 	        react.createElement(
+	          "span",
+	          {
+	            style: {
+	              color: inputGray,
+	              fontSize: 12,
+	              textAlign: "center",
+	              display: "block",
+	              marginBottom: "1em"
+	            }
+	          },
+	          "Photos provided by",
+	          " ",
+	          react.createElement(
+	            "a",
+	            { href: "https://unsplash.com/", target: "_blank", style: { color: inputGray } },
+	            "Unsplash"
+	          )
+	        ),
+	        react.createElement(
 	          "div",
 	          {
 	            className: "d-f",

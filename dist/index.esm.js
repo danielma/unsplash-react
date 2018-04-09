@@ -1126,6 +1126,25 @@ var UnsplashPicker = function (_React$Component) {
         },
         React.createElement(CSSStyles, null),
         React.createElement(
+          "span",
+          {
+            style: {
+              color: inputGray,
+              fontSize: 12,
+              textAlign: "center",
+              display: "block",
+              marginBottom: "1em"
+            }
+          },
+          "Photos provided by",
+          " ",
+          React.createElement(
+            "a",
+            { href: "https://unsplash.com/", target: "_blank", style: { color: inputGray } },
+            "Unsplash"
+          )
+        ),
+        React.createElement(
           "div",
           {
             className: "d-f",
