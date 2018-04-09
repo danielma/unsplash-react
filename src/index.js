@@ -261,6 +261,20 @@ export default class UnsplashPicker extends React.Component {
         className="unsplash-react d-f h-f p-0"
       >
         <CSSStyles />
+        <span
+          style={{
+            color: inputGray,
+            fontSize: 12,
+            textAlign: "center",
+            display: "block",
+            marginBottom: "1em",
+          }}
+        >
+          Photos provided by{" "}
+          <a href="https://unsplash.com/" target="_blank" style={{ color: inputGray }}>
+            Unsplash
+          </a>
+        </span>
         <div
           className="d-f"
           style={{
