@@ -1,6 +1,6 @@
-# master (unreleased)
+# v0.1.10 (2018-04-09)
 
-- make sure _all_ links to unsplash have utm params
+- make sure _all_ links to unsplash have utm params https://github.com/danielma/unsplash-react/commit/59a9b67
 
 # v0.1.9 (2018-04-09)
 
