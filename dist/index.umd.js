@@ -403,8 +403,7 @@
 	  return port !== 0;
 	};
 
-	var has = Object.prototype.hasOwnProperty
-	  , undef;
+	var has = Object.prototype.hasOwnProperty;
 
 	/**
 	 * Decode a URI encoded string.
@@ -429,18 +428,15 @@
 	    , result = {}
 	    , part;
 
-	  while (part = parser.exec(query)) {
-	    var key = decode$1(part[1])
-	      , value = decode$1(part[2]);
-
-	    //
-	    // Prevent overriding of existing properties. This ensures that build-in
-	    // methods like `toString` or __proto__ are not overriden by malicious
-	    // querystrings.
-	    //
-	    if (key in result) continue;
-	    result[key] = value;
-	  }
+	  //
+	  // Little nifty parsing hack, leverage the fact that RegExp.exec increments
+	  // the lastIndex property so we can continue executing this loop until we've
+	  // parsed all results.
+	  //
+	  for (;
+	    part = parser.exec(query);
+	    result[decode$1(part[1])] = decode$1(part[2])
+	  );
 
 	  return result;
 	}
@@ -456,28 +452,16 @@
 	function querystringify(obj, prefix) {
 	  prefix = prefix || '';
 
-	  var pairs = []
-	    , value
-	    , key;
+	  var pairs = [];
 
 	  //
 	  // Optionally prefix with a '?' if needed
 	  //
 	  if ('string' !== typeof prefix) prefix = '?';
 
-	  for (key in obj) {
+	  for (var key in obj) {
 	    if (has.call(obj, key)) {
-	      value = obj[key];
-
-	      //
-	      // Edge cases where we actually want to encode the value to an empty
-	      // string instead of the stringified value.
-	      //
-	      if (!value && (value === null || value === undef || isNaN(value))) {
-	        value = '';
-	      }
-
-	      pairs.push(encodeURIComponent(key) +'='+ encodeURIComponent(value));
+	      pairs.push(encodeURIComponent(key) +'='+ encodeURIComponent(obj[key]));
 	    }
 	  }
 
@@ -513,9 +497,6 @@
 	var rules = [
 	  ['#', 'hash'],                        // Extract from the back.
 	  ['?', 'query'],                       // Extract from the back.
-	  function sanitize(address) {          // Sanitize what is left of the address
-	    return address.replace('\\', '/');
-	  },
 	  ['/', 'pathname'],                    // Extract from the back.
 	  ['@', 'auth', 1],                     // Extract from the front.
 	  [NaN, 'host', undefined, 1, 1],       // Set left over value.
@@ -543,27 +524,19 @@
 	 *
 	 * @param {Object|String} loc Optional default location object.
 	 * @returns {Object} lolcation object.
-	 * @public
+	 * @api public
 	 */
 	function lolcation(loc) {
-	  var globalVar;
-
-	  if (typeof window !== 'undefined') globalVar = window;
-	  else if (typeof commonjsGlobal !== 'undefined') globalVar = commonjsGlobal;
-	  else if (typeof self !== 'undefined') globalVar = self;
-	  else globalVar = {};
-
-	  var location = globalVar.location || {};
-	  loc = loc || location;
+	  loc = loc || commonjsGlobal.location || {};
 
 	  var finaldestination = {}
 	    , type = typeof loc
 	    , key;
 
 	  if ('blob:' === loc.protocol) {
-	    finaldestination = new Url(unescape(loc.pathname), {});
+	    finaldestination = new URL(unescape(loc.pathname), {});
 	  } else if ('string' === type) {
-	    finaldestination = new Url(loc, {});
+	    finaldestination = new URL(loc, {});
 	    for (key in ignore) delete finaldestination[key];
 	  } else if ('object' === type) {
 	    for (key in loc) {
@@ -592,7 +565,7 @@
 	 *
 	 * @param {String} address URL we want to extract from.
 	 * @return {ProtocolExtract} Extracted information.
-	 * @private
+	 * @api private
 	 */
 	function extractProtocol(address) {
 	  var match = protocolre.exec(address);
@@ -610,7 +583,7 @@
 	 * @param {String} relative Pathname of the relative URL.
 	 * @param {String} base Pathname of the base URL.
 	 * @return {String} Resolved pathname.
-	 * @private
+	 * @api private
 	 */
 	function resolve(relative, base) {
 	  var path = (base || '/').split('/').slice(0, -1).concat(relative.split('/'))
@@ -643,18 +616,15 @@
 	 * create an actual constructor as it's much more memory efficient and
 	 * faster and it pleases my OCD.
 	 *
-	 * It is worth noting that we should not use `URL` as class name to prevent
-	 * clashes with the global URL instance that got introduced in browsers.
-	 *
 	 * @constructor
 	 * @param {String} address URL we want to parse.
-	 * @param {Object|String} [location] Location defaults for relative paths.
-	 * @param {Boolean|Function} [parser] Parser for the query string.
-	 * @private
+	 * @param {Object|String} location Location defaults for relative paths.
+	 * @param {Boolean|Function} parser Parser for the query string.
+	 * @api public
 	 */
-	function Url(address, location, parser) {
-	  if (!(this instanceof Url)) {
-	    return new Url(address, location, parser);
+	function URL(address, location, parser) {
+	  if (!(this instanceof URL)) {
+	    return new URL(address, location, parser);
 	  }
 
 	  var relative, extracted, parse, instruction, index, key
@@ -696,16 +666,10 @@
 	  // When the authority component is absent the URL starts with a path
 	  // component.
 	  //
-	  if (!extracted.slashes) instructions[3] = [/(.*)/, 'pathname'];
+	  if (!extracted.slashes) instructions[2] = [/(.*)/, 'pathname'];
 
 	  for (; i < instructions.length; i++) {
 	    instruction = instructions[i];
-
-	    if (typeof instruction === 'function') {
-	      address = instruction(address);
-	      continue;
-	    }
-
 	    parse = instruction[0];
 	    key = instruction[1];
 
@@ -796,8 +760,8 @@
 	 *                               used to parse the query.
 	 *                               When setting the protocol, double slash will be
 	 *                               removed from the final url if it is true.
-	 * @returns {URL} URL instance for chaining.
-	 * @public
+	 * @returns {URL}
+	 * @api public
 	 */
 	function set(part, value, fn) {
 	  var url = this;
@@ -882,8 +846,8 @@
 	 * Transform the properties back in to a valid and full URL string.
 	 *
 	 * @param {Function} stringify Optional query stringify function.
-	 * @returns {String} Compiled version of the URL.
-	 * @public
+	 * @returns {String}
+	 * @api public
 	 */
 	function toString(stringify) {
 	  if (!stringify || 'function' !== typeof stringify) stringify = querystringify_1.stringify;
@@ -912,17 +876,17 @@
 	  return result;
 	}
 
-	Url.prototype = { set: set, toString: toString };
+	URL.prototype = { set: set, toString: toString };
 
 	//
 	// Expose the URL parser and some additional properties that might be useful for
 	// others or testing.
 	//
-	Url.extractProtocol = extractProtocol;
-	Url.location = lolcation;
-	Url.qs = querystringify_1;
+	URL.extractProtocol = extractProtocol;
+	URL.location = lolcation;
+	URL.qs = querystringify_1;
 
-	var urlParse = Url;
+	var urlParse = URL;
 
 	var utils = createCommonjsModule(function (module, exports) {
 
