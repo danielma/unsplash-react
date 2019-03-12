@@ -1,3 +1,7 @@
+# v0.1.11 (2019-03-12)
+
+- Upgrade `unsplash-js` for 🔒 https://github.com/danielma/unsplash-react/pull/5
+
 # v0.1.10 (2018-04-09)
 
 - make sure _all_ links to unsplash have utm params https://github.com/danielma/unsplash-react/commit/59a9b67
