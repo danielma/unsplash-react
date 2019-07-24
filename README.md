@@ -64,6 +64,7 @@ name                  | type                       | required | default   | desc
 `defaultSearch`       | `string`                   | no       | `""`      | A default search string. If not set, `react-unsplash` will show popular photos from Unsplash
 `highlightColor`      | `string`                   | no       | `#00adf0` | The highlight color for images when they have been selected and downloaded
 `onFinishedUploading` | `func`                     | no       | no-op     | A callback, for when the photo has finished uploading. Called with the download response from the uploader (eg, the `response` with the `blob()`)
+`onSelectPhoto`       | `func`                     | no       | no-op     | A callback, for when a photo is clicked. Called with the photo data from the Unsplash API
 `photoRatio`          | `number`                   | no       | `3 / 2`   | The `width/height` ratio for displaying search results
 `preferredSize`       | `shape({ width, height })` | no       | n/a       | Your application's preferred width and height for downloaded images. If not set, `react-unsplash` will download full size images
 `Uploader`            | Component                  | no       | `Base64Uploader` | The component used to upload photos from Unsplash to your application.

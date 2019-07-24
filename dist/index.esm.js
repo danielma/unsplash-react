@@ -1022,7 +1022,9 @@ var UnsplashPicker = function (_React$Component) {
     };
 
     _this.handlePhotoClick = function (photo) {
-      _this.setState({ selectedPhoto: photo });
+      _this.setState({ selectedPhoto: photo }, function () {
+        _this.props.onSelectPhoto(photo);
+      });
     };
 
     _this.handleFinishedUploading = function (response) {
@@ -1299,6 +1301,7 @@ UnsplashPicker.propTypes = {
   defaultSearch: string$9,
   highlightColor: string$9,
   onFinishedUploading: func$6,
+  onSelectPhoto: func$6,
   photoRatio: number$3,
   preferredSize: shape$5({
     width: number$3.isRequired,
@@ -1312,6 +1315,7 @@ UnsplashPicker.defaultProps = {
   defaultSearch: "",
   highlightColor: "#00adf0",
   onFinishedUploading: noop,
+  onSelectPhoto: noop,
   photoRatio: 1.5,
   preferredSize: null,
   Uploader: Base64Uploader,
