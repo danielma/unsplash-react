@@ -1034,7 +1034,10 @@ var UnsplashPicker = function (_React$Component) {
     };
 
     _this.handleFinishedUploading = function (response) {
-      _this.setState({ loadingPhoto: null });
+      if (!_this.onSelectPhotoIsDefined) {
+        _this.setState({ loadingPhoto: null });
+      }
+
       _this.props.onFinishedUploading(response);
     };
 
@@ -1048,6 +1051,8 @@ var UnsplashPicker = function (_React$Component) {
         });
       }
     };
+
+    _this.onSelectPhotoIsDefined = _this.props.onSelectPhoto !== noop;
 
     _this.state = {
       unsplash: null,

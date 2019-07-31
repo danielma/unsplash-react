@@ -66,6 +66,8 @@ export default class UnsplashPicker extends React.Component {
   constructor(props) {
     super(props)
 
+    this.onSelectPhotoIsDefined = this.props.onSelectPhoto !== noop
+
     this.state = {
       unsplash: null,
       photos: [],
@@ -211,7 +213,10 @@ export default class UnsplashPicker extends React.Component {
   }
 
   handleFinishedUploading = response => {
-    this.setState({ loadingPhoto: null })
+    if (!this.onSelectPhotoIsDefined) {
+      this.setState({ loadingPhoto: null })
+    }
+
     this.props.onFinishedUploading(response)
   }
 
