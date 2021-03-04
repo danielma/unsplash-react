@@ -1,7 +1,7 @@
 import React from "react"
 
 export function toJson(response) {
-  return response.json()
+  return response.response.results
 }
 
 export function debounce(wait, func) {

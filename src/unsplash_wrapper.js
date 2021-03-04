@@ -1,4 +1,4 @@
-import Unsplash from "unsplash-js"
+import { createApi } from "unsplash-js"
 import { toJson } from "./utils"
 
 class ChaosMonkey {
@@ -25,11 +25,11 @@ class ChaosMonkey {
 export default class UnsplashWrapper {
   constructor({ accessKey, __debug_chaosMonkey = false }) {
     this.__debug_chaosMonkey = new ChaosMonkey(__debug_chaosMonkey)
-    this.unsplash = new Unsplash({ applicationId: accessKey })
+    this.unsplash = createApi({ accessKey })
   }
 
   listPhotos = (page, perPage, type = "popular") => {
-    return this.unsplash.photos.listPhotos(page, perPage, type).then(this.processResponse)
+    return this.unsplash.photos.list(page, perPage, type).then(this.processResponse)
   }
 
   searchPhotos = (search, page, perPage) => {
@@ -51,7 +51,7 @@ export default class UnsplashWrapper {
   }
 
   handleErrors(response) {
-    if (!response.ok) {
+    if (response.type !== "success") {
       const error = Error(response.statusText)
       error.status = response.status
       throw error
