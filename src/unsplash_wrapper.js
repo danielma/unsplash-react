@@ -1,5 +1,4 @@
 import { createApi } from "unsplash-js"
-import { toJson } from "./utils"
 
 class ChaosMonkey {
   constructor(shouldDoAnything) {
@@ -28,26 +27,34 @@ export default class UnsplashWrapper {
     this.unsplash = createApi({ accessKey })
   }
 
-  listPhotos = (page, perPage, type = "popular") => {
-    return this.unsplash.photos.list(page, perPage, type).then(this.processResponse)
+  listPhotos = (page, perPage, orderBy = "popular") => {
+    return this.unsplash.photos.list({ page, perPage, orderBy }).
+      then(this.processResponse).
+      then(({ response }) => response.results)
   }
 
-  searchPhotos = (search, page, perPage) => {
-    return this.unsplash.search.photos(search, page, perPage).then(this.processResponse)
+  searchPhotos = (query, page, perPage) => {
+    return this.unsplash.search.getPhotos({ query, page, perPage }).
+      then(this.processResponse).
+      then(({ response }) => response)
   }
 
   getPhoto = (id, { width, height } = {}) => {
-    return this.unsplash.photos.getPhoto(id, width, height).then(this.processResponse)
+    return this.unsplash.photos.get({ photoId: id, width, height }).
+      then(this.processResponse).
+      then(({ response }) => response)
   }
 
   downloadPhoto = photo => {
-    return this.unsplash.photos.downloadPhoto(photo).then(this.processResponse)
+    return this.unsplash.photos.trackDownload({ downloadLocation: photo.links.download_location }).
+      then(this.processResponse).
+      then(({ response }) => response)
   }
 
   processResponse = incomingResponse => {
     const response = Promise.resolve(this.__debug_chaosMonkey.process(incomingResponse))
 
-    return response.then(this.handleErrors).then(toJson)
+    return response.then(this.handleErrors)
   }
 
   handleErrors(response) {

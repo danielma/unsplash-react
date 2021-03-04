@@ -1,9 +1,5 @@
 import React from "react"
 
-export function toJson(response) {
-  return response.response.results
-}
-
 export function debounce(wait, func) {
   let timeout = null
 
