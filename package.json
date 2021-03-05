@@ -1,6 +1,6 @@
 {
   "name": "unsplash-react",
-  "version": "0.1.11",
+  "version": "0.2.0",
   "description": "Upload images from unsplash into your app",
   "source": "src/index.js",
   "main": "dist/index.cjs.js",
@@ -11,7 +11,7 @@
     "prop-types": "^15.6.1",
     "react": ">=15",
     "react-svg-spinner": "^1.0.1",
-    "unsplash-js": "^5.0.0"
+    "unsplash-js": "^7.0.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

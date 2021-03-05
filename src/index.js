@@ -186,7 +186,9 @@ export default class UnsplashPicker extends React.Component {
     const download = this.state.unsplash.downloadPhoto(photo)
 
     const downloadPromise = preferredSize
-      ? this.state.unsplash.getPhoto(photo.id, preferredSize).then(r => r.urls.custom)
+      ? this.state.unsplash.getPhoto(photo.id, preferredSize).then(
+        r => `${r.urls.raw}&w=${preferredSize.width}&h=${preferredSize.height}`,
+      )
       : download.then(r => r.url)
 
     return downloadPromise
