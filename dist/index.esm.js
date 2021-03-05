@@ -1,5 +1,5 @@
+import { createApi } from 'unsplash-js';
 import React from 'react';
-import Unsplash from 'unsplash-js';
 import propTypes from 'prop-types';
 import Spinner from 'react-svg-spinner';
 import 'intersection-observer';
@@ -88,58 +88,6 @@ var toConsumableArray = function (arr) {
   }
 };
 
-function toJson(response) {
-  return response.json();
-}
-
-function debounce(wait, func) {
-  var timeout = null;
-
-  return function () {
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    clearTimeout(timeout);
-
-    timeout = setTimeout(function () {
-      return func.apply(undefined, args);
-    }, wait);
-  };
-}
-
-function throttle(wait, func) {
-  var timeout = null;
-  var latestArgs = null;
-
-  return function () {
-    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      args[_key2] = arguments[_key2];
-    }
-
-    latestArgs = args;
-    if (timeout) return; // do nothing, we're waiting for the timeout to fire
-
-    func.apply(undefined, toConsumableArray(latestArgs));
-
-    timeout = setTimeout(function () {
-      clearTimeout(timeout);
-      timeout = null;
-      func.apply(undefined, toConsumableArray(latestArgs));
-    }, wait);
-  };
-}
-
-function withDefaultProps(Component, defaultProps) {
-  var WrappedComponent = function WrappedComponent(props) {
-    return React.createElement(Component, _extends({}, defaultProps, props));
-  };
-
-  WrappedComponent.displayName = "withDefaultProps(" + Component.name + ")";
-
-  return WrappedComponent;
-}
-
 var ChaosMonkey = function () {
   function ChaosMonkey(shouldDoAnything) {
     var _this = this;
@@ -179,41 +127,53 @@ var UnsplashWrapper = function () {
     classCallCheck(this, UnsplashWrapper);
 
     this.listPhotos = function (page, perPage) {
-      var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "popular";
+      var orderBy = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "popular";
 
-      return _this2.unsplash.photos.listPhotos(page, perPage, type).then(_this2.processResponse);
+      return _this2.unsplash.photos.list({ page: page, perPage: perPage, orderBy: orderBy }).then(_this2.processResponse).then(function (_ref2) {
+        var response = _ref2.response;
+        return response.results;
+      });
     };
 
-    this.searchPhotos = function (search, page, perPage) {
-      return _this2.unsplash.search.photos(search, page, perPage).then(_this2.processResponse);
+    this.searchPhotos = function (query, page, perPage) {
+      return _this2.unsplash.search.getPhotos({ query: query, page: page, perPage: perPage }).then(_this2.processResponse).then(function (_ref3) {
+        var response = _ref3.response;
+        return response;
+      });
     };
 
     this.getPhoto = function (id) {
-      var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-          width = _ref2.width,
-          height = _ref2.height;
+      var _ref4 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+          width = _ref4.width,
+          height = _ref4.height;
 
-      return _this2.unsplash.photos.getPhoto(id, width, height).then(_this2.processResponse);
+      return _this2.unsplash.photos.get({ photoId: id, width: width, height: height }).then(_this2.processResponse).then(function (_ref5) {
+        var response = _ref5.response;
+        return response;
+      });
     };
 
     this.downloadPhoto = function (photo) {
-      return _this2.unsplash.photos.downloadPhoto(photo).then(_this2.processResponse);
+      return _this2.unsplash.photos.trackDownload({ downloadLocation: photo.links.download_location }).then(_this2.processResponse).then(function (_ref6) {
+        var response = _ref6.response;
+        return response;
+      });
     };
 
     this.processResponse = function (incomingResponse) {
       var response = Promise.resolve(_this2.__debug_chaosMonkey.process(incomingResponse));
 
-      return response.then(_this2.handleErrors).then(toJson);
+      return response.then(_this2.handleErrors);
     };
 
     this.__debug_chaosMonkey = new ChaosMonkey(__debug_chaosMonkey);
-    this.unsplash = new Unsplash({ applicationId: accessKey });
+    this.unsplash = createApi({ accessKey: accessKey });
   }
 
   createClass(UnsplashWrapper, [{
     key: "handleErrors",
     value: function handleErrors(response) {
-      if (!response.ok) {
+      if (response.type !== "success") {
         var error = Error(response.statusText);
         error.status = response.status;
         throw error;
@@ -577,6 +537,54 @@ ReactIntersectionObserver.propTypes = {
   onIntersectionChange: func.isRequired,
   children: node.isRequired
 };
+
+function debounce(wait, func) {
+  var timeout = null;
+
+  return function () {
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(function () {
+      return func.apply(undefined, args);
+    }, wait);
+  };
+}
+
+function throttle(wait, func) {
+  var timeout = null;
+  var latestArgs = null;
+
+  return function () {
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    latestArgs = args;
+    if (timeout) return; // do nothing, we're waiting for the timeout to fire
+
+    func.apply(undefined, toConsumableArray(latestArgs));
+
+    timeout = setTimeout(function () {
+      clearTimeout(timeout);
+      timeout = null;
+      func.apply(undefined, toConsumableArray(latestArgs));
+    }, wait);
+  };
+}
+
+function withDefaultProps(Component, defaultProps) {
+  var WrappedComponent = function WrappedComponent(props) {
+    return React.createElement(Component, _extends({}, defaultProps, props));
+  };
+
+  WrappedComponent.displayName = "withDefaultProps(" + Component.name + ")";
+
+  return WrappedComponent;
+}
 
 var shape = propTypes.shape,
     string$4 = propTypes.string,
@@ -1003,7 +1011,7 @@ var UnsplashPicker = function (_React$Component) {
       var download = _this.state.unsplash.downloadPhoto(photo);
 
       var downloadPromise = preferredSize ? _this.state.unsplash.getPhoto(photo.id, preferredSize).then(function (r) {
-        return r.urls.custom;
+        return r.urls.raw + "&w=" + preferredSize.width + "&h=" + preferredSize.height;
       }) : download.then(function (r) {
         return r.url;
       });
