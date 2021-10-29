@@ -314,8 +314,8 @@ export default class UnsplashPicker extends React.Component {
 
         <div className="p-r f-1 border-radius" style={{ marginTop: ".5em", overflow: "hidden" }}>
           <div
-            className="h-f"
-            style={{ overflowY: "scroll" }}
+            className="h-f unsplash-react__image-grid"
+            style={{ overflowY: "scroll", "--imageWidth": `${searchResultWidth}px` }}
             ref={element => (this.searchResults = element)}
           >
             {error ? (
@@ -432,6 +432,12 @@ function CSSStyles() {
 
         .unsplash-react.border-radius,
         .unsplash-react .border-radius { border-radius: ${borderRadius}px; }
+
+        .unsplash-react .unsplash-react__image-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(calc(var(--imageWidth) - 16px), 1fr));
+          gap: 12px;
+        }
       `,
       }}
     />
@@ -519,10 +525,7 @@ Photo.propTypes = {
     }).isRequired,
     user: shape({ links: shape({ html: string.isRequired }).isRequired }).isRequired,
   }).isRequired,
-  width: number.isRequired,
   height: number.isRequired,
-  index: number.isRequired,
-  columns: number.isRequired,
   loadingPhoto: shape({ id: string.isRequired }),
   selectedPhoto: shape({ id: string.isRequired }),
   onPhotoClick: func.isRequired,
@@ -531,17 +534,13 @@ Photo.propTypes = {
 }
 function Photo({
   photo,
-  width,
   height,
-  index,
-  columns,
   loadingPhoto,
   selectedPhoto,
   onPhotoClick,
   highlightColor,
   utmLink,
 }) {
-  const isFarLeft = index % columns === 0
   const loadingPhotoId = loadingPhoto && loadingPhoto.id
   const selectedPhotoId = selectedPhoto && selectedPhoto.id
   const isSelectedAndLoaded = loadingPhotoId === null && selectedPhotoId === photo.id
@@ -549,19 +548,7 @@ function Photo({
   const onClick = () => onPhotoClick(photo)
 
   return (
-    <div
-      style={{
-        display: "inline-block",
-        width,
-        marginTop: 0,
-        marginBottom: 12,
-        marginLeft: 0,
-        marginRight: 0,
-        paddingTop: ".5em",
-        paddingLeft: isFarLeft || ".5em",
-      }}
-      className="p-0"
-    >
+    <div>
       <div
         className="p-r border-radius"
         style={{
