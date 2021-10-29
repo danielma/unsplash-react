@@ -27,6 +27,7 @@ const inputNoAppearanceStyle = {
   boxShadow: "none",
   fontSize: "1em",
   outline: "none",
+  height: "inherit",
 }
 
 const inputGray = "#AAA"
@@ -426,6 +427,9 @@ function CSSStyles() {
         .unsplash-react.h-f,
         .unsplash-react .h-f { height: 100%; }
 
+        .unsplash-react.ai-c,
+        .unsplash-react .ai-c { align-items: center; }
+
         .unsplash-react.border-radius,
         .unsplash-react .border-radius { border-radius: ${borderRadius}px; }
       `,
@@ -437,9 +441,9 @@ function CSSStyles() {
 SearchInputIcon.propTypes = { isLoading: bool.isRequired, hasError: bool.isRequired, style: object }
 function SearchInputIcon({ isLoading, hasError, style, ...rest }) {
   const searchColor = hasError ? "#D62828" : inputGray
-  const mergedStyle = { top: "0.15em", marginRight: ".5em", ...style }
+  const mergedStyle = { marginRight: ".5em", ...style }
   return (
-    <div className="p-r" style={mergedStyle} {...rest}>
+    <div className="p-r d-f ai-c" style={mergedStyle} {...rest}>
       {isLoading ? (
         <Spinner size="1em" color={searchColor} />
       ) : (
