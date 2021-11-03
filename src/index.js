@@ -333,7 +333,6 @@ export default class UnsplashPicker extends React.Component {
                     key={photo.id}
                     photo={photo}
                     index={index}
-                    width={searchResultWidth}
                     height={searchResultHeight}
                     columns={searchResultColumns}
                     loadingPhoto={loadingPhoto}
