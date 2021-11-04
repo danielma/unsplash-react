@@ -337,7 +337,6 @@ export default class UnsplashPicker extends React.Component {
                     key={photo.id}
                     photo={photo}
                     index={index}
-                    height={searchResultHeight}
                     columns={searchResultColumns}
                     loadingPhoto={loadingPhoto}
                     selectedPhoto={selectedPhoto}
@@ -535,7 +534,6 @@ Photo.propTypes = {
     }).isRequired,
     user: shape({ links: shape({ html: string.isRequired }).isRequired }).isRequired,
   }).isRequired,
-  height: number.isRequired,
   loadingPhoto: shape({ id: string.isRequired }),
   selectedPhoto: shape({ id: string.isRequired }),
   onPhotoClick: func.isRequired,
@@ -544,7 +542,6 @@ Photo.propTypes = {
 }
 function Photo({
   photo,
-  height,
   loadingPhoto,
   selectedPhoto,
   onPhotoClick,
