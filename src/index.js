@@ -315,7 +315,11 @@ export default class UnsplashPicker extends React.Component {
         <div className="p-r f-1 border-radius" style={{ marginTop: ".5em", overflow: "hidden" }}>
           <div
             className="h-f unsplash-react__image-grid"
-            style={{ overflowY: "scroll", "--imageWidth": `${searchResultWidth}px` }}
+            style={{
+              overflowY: "scroll",
+              "--imageWidth": `${searchResultWidth}px`,
+              "--imageHeight": `${searchResultHeight}px`,
+            }}
             ref={element => (this.searchResults = element)}
           >
             {error ? (
