@@ -38,6 +38,7 @@ export default class SpinnerImg extends React.Component {
         <img
           {...rest}
           src={this.state.loaded ? src : blank}
+          className="unsplash-react__image"
           style={{
             ...style,
             transition: `opacity .3s, ${style.transition}`,

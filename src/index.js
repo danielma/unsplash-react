@@ -441,6 +441,13 @@ function CSSStyles() {
           grid-template-columns: repeat(auto-fit, minmax(calc(var(--imageWidth) - 16px), 1fr));
           gap: 12px;
         }
+
+        .unsplash-react__image {
+          display: block;
+          width: 100%;
+          height: var(--imageHeight);
+          object-fit: cover;
+        }
       `,
       }}
     />
@@ -565,10 +572,6 @@ function Photo({
         <SpinnerImg
           src={photo.urls.small}
           style={{
-            display: "block",
-            width: "100%",
-            height,
-            objectFit: "cover",
             borderWidth,
             borderStyle: "solid",
             borderColor: isSelectedAndLoaded ? highlightColor : "transparent",
