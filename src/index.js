@@ -27,6 +27,7 @@ const inputNoAppearanceStyle = {
   boxShadow: "none",
   fontSize: "1em",
   outline: "none",
+  height: "inherit",
 }
 
 const inputGray = "#AAA"
@@ -313,8 +314,12 @@ export default class UnsplashPicker extends React.Component {
 
         <div className="p-r f-1 border-radius" style={{ marginTop: ".5em", overflow: "hidden" }}>
           <div
-            className="h-f"
-            style={{ overflowY: "scroll" }}
+            className="h-f unsplash-react__image-grid"
+            style={{
+              overflowY: "scroll",
+              "--imageWidth": `${searchResultWidth}px`,
+              "--imageHeight": `${searchResultHeight}px`,
+            }}
             ref={element => (this.searchResults = element)}
           >
             {error ? (
@@ -327,14 +332,10 @@ export default class UnsplashPicker extends React.Component {
               </div>
             ) : (
               [
-                photos.map((photo, index) => (
+                photos.map(photo => (
                   <Photo
                     key={photo.id}
                     photo={photo}
-                    index={index}
-                    width={searchResultWidth}
-                    height={searchResultHeight}
-                    columns={searchResultColumns}
                     loadingPhoto={loadingPhoto}
                     selectedPhoto={selectedPhoto}
                     onPhotoClick={this.handlePhotoClick}
@@ -426,8 +427,24 @@ function CSSStyles() {
         .unsplash-react.h-f,
         .unsplash-react .h-f { height: 100%; }
 
+        .unsplash-react.ai-c,
+        .unsplash-react .ai-c { align-items: center; }
+
         .unsplash-react.border-radius,
         .unsplash-react .border-radius { border-radius: ${borderRadius}px; }
+
+        .unsplash-react .unsplash-react__image-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(calc(var(--imageWidth) - 16px), 1fr));
+          gap: 12px;
+        }
+
+        .unsplash-react__image {
+          display: block;
+          width: 100%;
+          height: var(--imageHeight);
+          object-fit: cover;
+        }
       `,
       }}
     />
@@ -437,9 +454,9 @@ function CSSStyles() {
 SearchInputIcon.propTypes = { isLoading: bool.isRequired, hasError: bool.isRequired, style: object }
 function SearchInputIcon({ isLoading, hasError, style, ...rest }) {
   const searchColor = hasError ? "#D62828" : inputGray
-  const mergedStyle = { top: "0.15em", marginRight: ".5em", ...style }
+  const mergedStyle = { marginRight: ".5em", ...style }
   return (
-    <div className="p-r" style={mergedStyle} {...rest}>
+    <div className="p-r d-f ai-c" style={mergedStyle} {...rest}>
       {isLoading ? (
         <Spinner size="1em" color={searchColor} />
       ) : (
@@ -515,10 +532,6 @@ Photo.propTypes = {
     }).isRequired,
     user: shape({ links: shape({ html: string.isRequired }).isRequired }).isRequired,
   }).isRequired,
-  width: number.isRequired,
-  height: number.isRequired,
-  index: number.isRequired,
-  columns: number.isRequired,
   loadingPhoto: shape({ id: string.isRequired }),
   selectedPhoto: shape({ id: string.isRequired }),
   onPhotoClick: func.isRequired,
@@ -527,17 +540,12 @@ Photo.propTypes = {
 }
 function Photo({
   photo,
-  width,
-  height,
-  index,
-  columns,
   loadingPhoto,
   selectedPhoto,
   onPhotoClick,
   highlightColor,
   utmLink,
 }) {
-  const isFarLeft = index % columns === 0
   const loadingPhotoId = loadingPhoto && loadingPhoto.id
   const selectedPhotoId = selectedPhoto && selectedPhoto.id
   const isSelectedAndLoaded = loadingPhotoId === null && selectedPhotoId === photo.id
@@ -545,19 +553,7 @@ function Photo({
   const onClick = () => onPhotoClick(photo)
 
   return (
-    <div
-      style={{
-        display: "inline-block",
-        width,
-        marginTop: 0,
-        marginBottom: 12,
-        marginLeft: 0,
-        marginRight: 0,
-        paddingTop: ".5em",
-        paddingLeft: isFarLeft || ".5em",
-      }}
-      className="p-0"
-    >
+    <div>
       <div
         className="p-r border-radius"
         style={{
@@ -571,10 +567,6 @@ function Photo({
         <SpinnerImg
           src={photo.urls.small}
           style={{
-            display: "block",
-            width: "100%",
-            height,
-            objectFit: "cover",
             borderWidth,
             borderStyle: "solid",
             borderColor: isSelectedAndLoaded ? highlightColor : "transparent",
