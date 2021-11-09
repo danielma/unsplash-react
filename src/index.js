@@ -332,12 +332,10 @@ export default class UnsplashPicker extends React.Component {
               </div>
             ) : (
               [
-                photos.map((photo, index) => (
+                photos.map(photo => (
                   <Photo
                     key={photo.id}
                     photo={photo}
-                    index={index}
-                    columns={searchResultColumns}
                     loadingPhoto={loadingPhoto}
                     selectedPhoto={selectedPhoto}
                     onPhotoClick={this.handlePhotoClick}
