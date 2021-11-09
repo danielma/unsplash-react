@@ -1636,6 +1636,7 @@
 	        { className: "p-r" },
 	        react.createElement("img", _extends$1({}, rest, {
 	          src: this.state.loaded ? src : blank,
+	          className: "unsplash-react__image",
 	          style: _extends$1({}, style, {
 	            transition: "opacity .3s, " + style.transition,
 	            opacity: loaded ? 1 : 0
@@ -2821,7 +2822,8 @@
 	  backgroundColor: "transparent",
 	  boxShadow: "none",
 	  fontSize: "1em",
-	  outline: "none"
+	  outline: "none",
+	  height: "inherit"
 	};
 
 	var inputGray = "#AAA";
@@ -3114,8 +3116,12 @@
 	          react.createElement(
 	            "div",
 	            {
-	              className: "h-f",
-	              style: { overflowY: "scroll" },
+	              className: "h-f unsplash-react__image-grid",
+	              style: {
+	                overflowY: "scroll",
+	                "--imageWidth": searchResultWidth + "px",
+	                "--imageHeight": searchResultHeight + "px"
+	              },
 	              ref: function ref(element) {
 	                return _this2.searchResults = element;
 	              }
@@ -3136,14 +3142,10 @@
 	                { style: { color: inputGray } },
 	                error
 	              )
-	            ) : [photos.map(function (photo, index) {
+	            ) : [photos.map(function (photo) {
 	              return react.createElement(Photo, {
 	                key: photo.id,
 	                photo: photo,
-	                index: index,
-	                width: searchResultWidth,
-	                height: searchResultHeight,
-	                columns: searchResultColumns,
 	                loadingPhoto: loadingPhoto,
 	                selectedPhoto: selectedPhoto,
 	                onPhotoClick: _this2.handlePhotoClick,
@@ -3239,7 +3241,7 @@
 	function CSSStyles() {
 	  return react.createElement("style", {
 	    dangerouslySetInnerHTML: {
-	      __html: "\n        .unsplash-react, .unsplash-react * { box-sizing: border-box }\n        .unsplash-react input::placeholder {\n          color: " + inputGray + ";\n          opacity: 1;\n        }\n        @keyframes unsplash-react-fadein {\n          from { opacity: 0; }\n          to   { opacity: 1; }\n        }\n\n        .unsplash-react .p-r { position: relative; }\n        .unsplash-react .p-a { position: absolute; }\n\n        .unsplash-react.p-0,\n        .unsplash-react .p-0 { padding: 0; }\n\n        .unsplash-react .f-1 { flex: 1; }\n\n        .unsplash-react.d-f,\n        .unsplash-react .d-f { display: flex; }\n\n        .unsplash-react.h-f,\n        .unsplash-react .h-f { height: 100%; }\n\n        .unsplash-react.border-radius,\n        .unsplash-react .border-radius { border-radius: " + borderRadius + "px; }\n      "
+	      __html: "\n        .unsplash-react, .unsplash-react * { box-sizing: border-box }\n        .unsplash-react input::placeholder {\n          color: " + inputGray + ";\n          opacity: 1;\n        }\n        @keyframes unsplash-react-fadein {\n          from { opacity: 0; }\n          to   { opacity: 1; }\n        }\n\n        .unsplash-react .p-r { position: relative; }\n        .unsplash-react .p-a { position: absolute; }\n\n        .unsplash-react.p-0,\n        .unsplash-react .p-0 { padding: 0; }\n\n        .unsplash-react .f-1 { flex: 1; }\n\n        .unsplash-react.d-f,\n        .unsplash-react .d-f { display: flex; }\n\n        .unsplash-react.h-f,\n        .unsplash-react .h-f { height: 100%; }\n\n        .unsplash-react.ai-c,\n        .unsplash-react .ai-c { align-items: center; }\n\n        .unsplash-react.border-radius,\n        .unsplash-react .border-radius { border-radius: " + borderRadius + "px; }\n\n        .unsplash-react .unsplash-react__image-grid {\n          display: grid;\n          grid-template-columns: repeat(auto-fit, minmax(calc(var(--imageWidth) - 16px), 1fr));\n          gap: 12px;\n        }\n\n        .unsplash-react__image {\n          display: block;\n          width: 100%;\n          height: var(--imageHeight);\n          object-fit: cover;\n        }\n      "
 	    }
 	  });
 	}
@@ -3252,10 +3254,10 @@
 	      rest = objectWithoutProperties(_ref5, ["isLoading", "hasError", "style"]);
 
 	  var searchColor = hasError ? "#D62828" : inputGray;
-	  var mergedStyle = _extends$1({ top: "0.15em", marginRight: ".5em" }, style);
+	  var mergedStyle = _extends$1({ marginRight: ".5em" }, style);
 	  return react.createElement(
 	    "div",
-	    _extends$1({ className: "p-r", style: mergedStyle }, rest),
+	    _extends$1({ className: "p-r d-f ai-c", style: mergedStyle }, rest),
 	    isLoading ? react.createElement(Spinner, { size: "1em", color: searchColor }) : react.createElement(SearchIcon, { width: "1em", height: "1em", style: { color: searchColor } })
 	  );
 	}
@@ -3330,10 +3332,6 @@
 	    }).isRequired,
 	    user: shape$5({ links: shape$5({ html: string$9.isRequired }).isRequired }).isRequired
 	  }).isRequired,
-	  width: number$3.isRequired,
-	  height: number$3.isRequired,
-	  index: number$3.isRequired,
-	  columns: number$3.isRequired,
 	  loadingPhoto: shape$5({ id: string$9.isRequired }),
 	  selectedPhoto: shape$5({ id: string$9.isRequired }),
 	  onPhotoClick: func$6.isRequired,
@@ -3342,17 +3340,12 @@
 	};
 	function Photo(_ref8) {
 	  var photo = _ref8.photo,
-	      width = _ref8.width,
-	      height = _ref8.height,
-	      index = _ref8.index,
-	      columns = _ref8.columns,
 	      loadingPhoto = _ref8.loadingPhoto,
 	      selectedPhoto = _ref8.selectedPhoto,
 	      onPhotoClick = _ref8.onPhotoClick,
 	      highlightColor = _ref8.highlightColor,
 	      utmLink = _ref8.utmLink;
 
-	  var isFarLeft = index % columns === 0;
 	  var loadingPhotoId = loadingPhoto && loadingPhoto.id;
 	  var selectedPhotoId = selectedPhoto && selectedPhoto.id;
 	  var isSelectedAndLoaded = loadingPhotoId === null && selectedPhotoId === photo.id;
@@ -3363,19 +3356,7 @@
 
 	  return react.createElement(
 	    "div",
-	    {
-	      style: {
-	        display: "inline-block",
-	        width: width,
-	        marginTop: 0,
-	        marginBottom: 12,
-	        marginLeft: 0,
-	        marginRight: 0,
-	        paddingTop: ".5em",
-	        paddingLeft: isFarLeft || ".5em"
-	      },
-	      className: "p-0"
-	    },
+	    null,
 	    react.createElement(
 	      "div",
 	      {
@@ -3391,10 +3372,6 @@
 	      react.createElement(SpinnerImg, {
 	        src: photo.urls.small,
 	        style: {
-	          display: "block",
-	          width: "100%",
-	          height: height,
-	          objectFit: "cover",
 	          borderWidth: borderWidth,
 	          borderStyle: "solid",
 	          borderColor: isSelectedAndLoaded ? highlightColor : "transparent",
