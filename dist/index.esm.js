@@ -587,6 +587,10 @@ function withDefaultProps(Component, defaultProps) {
   return WrappedComponent;
 }
 
+function NullComponent() {
+  return null;
+}
+
 var shape = propTypes.shape,
     string$4 = propTypes.string,
     func$1 = propTypes.func;
@@ -1114,6 +1118,7 @@ var UnsplashPicker = function (_React$Component) {
       var _this2 = this;
 
       var _props = this.props,
+          AfterAttribution = _props.AfterAttribution,
           Uploader = _props.Uploader,
           searchResultColumns = _props.columns,
           photoRatio = _props.photoRatio,
@@ -1142,27 +1147,30 @@ var UnsplashPicker = function (_React$Component) {
         },
         React.createElement(CSSStyles, null),
         React.createElement(
-          "span",
-          {
-            style: {
-              color: inputGray,
-              fontSize: 12,
-              textAlign: "center",
-              display: "block",
-              marginBottom: "1em"
-            }
-          },
-          "Photos provided by",
-          " ",
+          "div",
+          { style: { textAlign: "center" } },
           React.createElement(
-            "a",
+            "span",
             {
-              href: this.utmLink("https://unsplash.com/"),
-              target: "_blank",
-              style: { color: inputGray }
+              style: {
+                color: inputGray,
+                fontSize: 12,
+                marginBottom: "1em"
+              }
             },
-            "Unsplash"
-          )
+            "Photos provided by",
+            " ",
+            React.createElement(
+              "a",
+              {
+                href: this.utmLink("https://unsplash.com/"),
+                target: "_blank",
+                style: { color: inputGray }
+              },
+              "Unsplash"
+            )
+          ),
+          React.createElement(AfterAttribution, null)
         ),
         React.createElement(
           "div",
@@ -1315,7 +1323,8 @@ UnsplashPicker.propTypes = {
     height: number$3.isRequired
   }),
   Uploader: func$6,
-  __debug_chaosMonkey: bool
+  __debug_chaosMonkey: bool,
+  AfterAttribution: func$6
 };
 UnsplashPicker.defaultProps = {
   columns: 3,
@@ -1325,7 +1334,8 @@ UnsplashPicker.defaultProps = {
   photoRatio: 1.5,
   preferredSize: null,
   Uploader: Base64Uploader,
-  __debug_chaosMonkey: false
+  __debug_chaosMonkey: false,
+  AfterAttribution: NullComponent
 };
 
 function CSSStyles() {
