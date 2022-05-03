@@ -8,7 +8,7 @@ import ArrowIcon from "./arrow_icon"
 import SpinnerImg from "./spinner_img"
 import ReactIntersectionObserver from "./react_intersection_observer.js"
 import "intersection-observer"
-import { debounce, throttle, withDefaultProps } from "./utils"
+import { debounce, throttle, withDefaultProps, NullComponent } from "./utils"
 const { string, func, number, bool, object, shape } = propTypes
 
 import BlobUploader from "./uploaders/blob_uploader"
@@ -49,6 +49,7 @@ export default class UnsplashPicker extends React.Component {
     }),
     Uploader: func,
     __debug_chaosMonkey: bool,
+    AfterAttribution: func,
   }
 
   static defaultProps = {
@@ -60,6 +61,7 @@ export default class UnsplashPicker extends React.Component {
     preferredSize: null,
     Uploader: Base64Uploader,
     __debug_chaosMonkey: false,
+    AfterAttribution: NullComponent,
   }
 
   constructor(props) {
@@ -239,7 +241,13 @@ export default class UnsplashPicker extends React.Component {
   }
 
   render() {
-    const { Uploader, columns: searchResultColumns, photoRatio, highlightColor } = this.props
+    const {
+      AfterAttribution,
+      Uploader,
+      columns: searchResultColumns,
+      photoRatio,
+      highlightColor,
+    } = this.props
     const {
       photos,
       search,
@@ -264,24 +272,25 @@ export default class UnsplashPicker extends React.Component {
         className="unsplash-react d-f h-f p-0"
       >
         <CSSStyles />
-        <span
-          style={{
-            color: inputGray,
-            fontSize: 12,
-            textAlign: "center",
-            display: "block",
-            marginBottom: "1em",
-          }}
-        >
-          Photos provided by{" "}
-          <a
-            href={this.utmLink("https://unsplash.com/")}
-            target="_blank"
-            style={{ color: inputGray }}
+        <div style={{ textAlign: "center" }}>
+          <span
+            style={{
+              color: inputGray,
+              fontSize: 12,
+              marginBottom: "1em",
+            }}
           >
-            Unsplash
-          </a>
-        </span>
+            Photos provided by{" "}
+            <a
+              href={this.utmLink("https://unsplash.com/")}
+              target="_blank"
+              style={{ color: inputGray }}
+            >
+              Unsplash
+            </a>
+          </span>
+          <AfterAttribution />
+        </div>
         <div
           className="d-f"
           style={{
