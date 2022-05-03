@@ -37,3 +37,7 @@ export function withDefaultProps(Component, defaultProps) {
 
   return WrappedComponent
 }
+
+export function NullComponent() {
+  return null
+}
