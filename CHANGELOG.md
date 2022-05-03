@@ -1,3 +1,7 @@
+# v0.3.0 (2022-05-03)
+
+- Add `AfterAttribution` prop https://github.com/danielma/unsplash-react/pull/27
+
 # v0.1.11 (2019-03-12)
 
 - Upgrade `unsplash-js` for 🔒 https://github.com/danielma/unsplash-react/pull/5
