@@ -7,7 +7,6 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var unsplashJs = require('unsplash-js');
 var React = _interopDefault(require('react'));
 var propTypes = _interopDefault(require('prop-types'));
-var Spinner = _interopDefault(require('react-svg-spinner'));
 require('intersection-observer');
 
 var classCallCheck = function (instance, Constructor) {
@@ -190,6 +189,73 @@ var UnsplashWrapper = function () {
   }]);
   return UnsplashWrapper;
 }();
+
+function speedSwitch(speed) {
+  if (speed === "fast") return 600;
+  if (speed === "slow") return 900;
+  return 750;
+}
+
+var Spinner = function Spinner(_ref) {
+  var color = _ref.color,
+      speed = _ref.speed,
+      gap = _ref.gap,
+      thickness = _ref.thickness,
+      size = _ref.size,
+      props = objectWithoutProperties(_ref, ["color", "speed", "gap", "thickness", "size"]);
+  return React.createElement(
+    "svg",
+    _extends({
+      height: size,
+      width: size
+    }, props, {
+      style: { animationDuration: speedSwitch(speed) + "ms" },
+      className: "__react-svg-spinner_circle",
+      role: "img",
+      "aria-labelledby": "title desc",
+      viewBox: "0 0 32 32"
+    }),
+    React.createElement(
+      "title",
+      { id: "title" },
+      "Circle loading spinner"
+    ),
+    React.createElement(
+      "desc",
+      { id: "desc" },
+      "Image of a partial circle indicating \"loading.\""
+    ),
+    React.createElement("style", {
+      dangerouslySetInnerHTML: {
+        __html: "\n      .__react-svg-spinner_circle{\n          transition-property: transform;\n          animation-name: __react-svg-spinner_infinite-spin;\n          animation-iteration-count: infinite;\n          animation-timing-function: linear;\n      }\n      @keyframes __react-svg-spinner_infinite-spin {\n          from {transform: rotate(0deg)}\n          to {transform: rotate(360deg)}\n      }\n    "
+      }
+    }),
+    React.createElement("circle", {
+      role: "presentation",
+      cx: 16,
+      cy: 16,
+      r: 14 - thickness / 2,
+      stroke: color,
+      fill: "none",
+      strokeWidth: thickness,
+      strokeDasharray: Math.PI * 2 * (11 - gap),
+      strokeLinecap: "round"
+    })
+  );
+};
+Spinner.propTypes = {
+  color: propTypes.string,
+  thickness: propTypes.oneOf([1, 2, 3, 4, 5, 6, 7, 8]).isRequired,
+  gap: propTypes.oneOf([1, 2, 3, 4, 5]).isRequired,
+  speed: propTypes.oneOf(["fast", "slow"]),
+  size: propTypes.string.isRequired
+};
+Spinner.defaultProps = {
+  color: "rgba(0,0,0,0.4)",
+  gap: 4,
+  thickness: 4,
+  size: "1em"
+};
 
 var number = propTypes.number,
     object = propTypes.object,

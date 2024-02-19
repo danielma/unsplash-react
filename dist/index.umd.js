@@ -4,10 +4,6 @@
 	(factory((global.UnsplashReact = {})));
 }(this, (function (exports) { 'use strict';
 
-	function unwrapExports (x) {
-		return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-	}
-
 	function createCommonjsModule(fn, module) {
 		return module = { exports: {} }, fn(module, module.exports), module.exports;
 	}
@@ -1378,12 +1374,72 @@
 	}
 	});
 
-	var index_m = createCommonjsModule(function (module) {
-	var e=Object.assign||function(e){for(var t=arguments,n=1;n<arguments.length;n++){var r=t[n];for(var i in r)Object.prototype.hasOwnProperty.call(r,i)&&(e[i]=r[i]);}return e},t=r(react),n=r(propTypes);function r(e){return e&&e.__esModule?e:{default:e}}var i=function(n){var r=n.color,i=n.speed,a=n.gap,s=n.thickness,o=n.size,l=function(e,t){var n={};for(var r in e)t.indexOf(r)>=0||Object.prototype.hasOwnProperty.call(e,r)&&(n[r]=e[r]);return n}(n,["color","speed","gap","thickness","size"]);return t.default.createElement("svg",e({height:o,width:o},l,{style:{animationDuration:function(e){return"fast"===e?600:"slow"===e?900:750}(i)+"ms"},className:"__react-svg-spinner_circle",role:"img","aria-labelledby":"title desc",viewBox:"0 0 32 32"}),t.default.createElement("title",{id:"title"},"Circle loading spinner"),t.default.createElement("desc",{id:"desc"},'Image of a partial circle indicating "loading."'),t.default.createElement("style",{dangerouslySetInnerHTML:{__html:"\n      .__react-svg-spinner_circle{\n          transition-property: transform;\n          animation-name: __react-svg-spinner_infinite-spin;\n          animation-iteration-count: infinite;\n          animation-timing-function: linear;\n      }\n      @keyframes __react-svg-spinner_infinite-spin {\n          from {transform: rotate(0deg)}\n          to {transform: rotate(360deg)}\n      }\n    "}}),t.default.createElement("circle",{role:"presentation",cx:16,cy:16,r:14-s/2,stroke:r,fill:"none",strokeWidth:s,strokeDasharray:2*Math.PI*(11-a),strokeLinecap:"round"}))};i.propTypes={color:n.default.string,thickness:n.default.oneOf([1,2,3,4,5,6,7,8]).isRequired,gap:n.default.oneOf([1,2,3,4,5]).isRequired,speed:n.default.oneOf(["fast","slow"]),size:n.default.string.isRequired}, i.defaultProps={color:"rgba(0,0,0,0.4)",gap:4,thickness:4,size:"1em"}, module.exports=i;
+	function speedSwitch(speed) {
+	  if (speed === "fast") return 600;
+	  if (speed === "slow") return 900;
+	  return 750;
+	}
 
-	});
-
-	var Spinner = unwrapExports(index_m);
+	var Spinner = function Spinner(_ref) {
+	  var color = _ref.color,
+	      speed = _ref.speed,
+	      gap = _ref.gap,
+	      thickness = _ref.thickness,
+	      size = _ref.size,
+	      props = objectWithoutProperties(_ref, ["color", "speed", "gap", "thickness", "size"]);
+	  return react.createElement(
+	    "svg",
+	    _extends$1({
+	      height: size,
+	      width: size
+	    }, props, {
+	      style: { animationDuration: speedSwitch(speed) + "ms" },
+	      className: "__react-svg-spinner_circle",
+	      role: "img",
+	      "aria-labelledby": "title desc",
+	      viewBox: "0 0 32 32"
+	    }),
+	    react.createElement(
+	      "title",
+	      { id: "title" },
+	      "Circle loading spinner"
+	    ),
+	    react.createElement(
+	      "desc",
+	      { id: "desc" },
+	      "Image of a partial circle indicating \"loading.\""
+	    ),
+	    react.createElement("style", {
+	      dangerouslySetInnerHTML: {
+	        __html: "\n      .__react-svg-spinner_circle{\n          transition-property: transform;\n          animation-name: __react-svg-spinner_infinite-spin;\n          animation-iteration-count: infinite;\n          animation-timing-function: linear;\n      }\n      @keyframes __react-svg-spinner_infinite-spin {\n          from {transform: rotate(0deg)}\n          to {transform: rotate(360deg)}\n      }\n    "
+	      }
+	    }),
+	    react.createElement("circle", {
+	      role: "presentation",
+	      cx: 16,
+	      cy: 16,
+	      r: 14 - thickness / 2,
+	      stroke: color,
+	      fill: "none",
+	      strokeWidth: thickness,
+	      strokeDasharray: Math.PI * 2 * (11 - gap),
+	      strokeLinecap: "round"
+	    })
+	  );
+	};
+	Spinner.propTypes = {
+	  color: propTypes.string,
+	  thickness: propTypes.oneOf([1, 2, 3, 4, 5, 6, 7, 8]).isRequired,
+	  gap: propTypes.oneOf([1, 2, 3, 4, 5]).isRequired,
+	  speed: propTypes.oneOf(["fast", "slow"]),
+	  size: propTypes.string.isRequired
+	};
+	Spinner.defaultProps = {
+	  color: "rgba(0,0,0,0.4)",
+	  gap: 4,
+	  thickness: 4,
+	  size: "1em"
+	};
 
 	var number = propTypes.number,
 	    object = propTypes.object,
