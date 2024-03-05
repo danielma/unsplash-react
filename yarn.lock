@@ -3858,14 +3858,7 @@ react-dom@^16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-svg-spinner@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-svg-spinner/-/react-svg-spinner-1.0.1.tgz#cdf39ad1c4e896081f9f82b9e7b799f3929386db"
-  dependencies:
-    prop-types "^15.6.0"
-    react ">= 15 < 17"
-
-"react@>= 15 < 17", react@>=15:
+react@>=15:
   version "16.3.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.3.1.tgz#4a2da433d471251c69b6033ada30e2ed1202cfd8"
   dependencies:

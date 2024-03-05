@@ -1,6 +1,6 @@
 import React from "react"
 import UnsplashWrapper from "./unsplash_wrapper"
-import Spinner from "react-svg-spinner"
+import Spinner from "./spinner"
 import propTypes from "prop-types"
 import SearchIcon from "./search_icon"
 import ErrorImage from "./error_image"

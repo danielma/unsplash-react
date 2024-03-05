@@ -1,5 +1,5 @@
 import React from "react"
-import Spinner from "react-svg-spinner"
+import Spinner from "./spinner"
 import propTypes from "prop-types"
 const { string, object } = propTypes
 
