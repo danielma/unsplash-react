@@ -50,6 +50,7 @@ export default class UnsplashPicker extends React.Component {
     Uploader: func,
     __debug_chaosMonkey: bool,
     AfterAttribution: func,
+    searchParams: object,
   }
 
   static defaultProps = {
@@ -62,6 +63,7 @@ export default class UnsplashPicker extends React.Component {
     Uploader: Base64Uploader,
     __debug_chaosMonkey: false,
     AfterAttribution: NullComponent,
+    searchParams: {},
   }
 
   constructor(props) {
@@ -155,7 +157,7 @@ export default class UnsplashPicker extends React.Component {
     const page = append ? this.state.page : 1
 
     return unsplash
-      .searchPhotos(search, this.state.page, this.resultsPerPage)
+      .searchPhotos(search, this.state.page, this.resultsPerPage, this.props.searchParams)
       .then(response =>
         this.setState(
           prevState => ({

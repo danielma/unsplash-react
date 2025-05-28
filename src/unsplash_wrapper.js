@@ -27,14 +27,14 @@ export default class UnsplashWrapper {
     this.unsplash = createApi({ accessKey })
   }
 
-  listPhotos = (page, perPage, orderBy = "popular") => {
-    return this.unsplash.photos.list({ page, perPage, orderBy }).
+  listPhotos = (page, perPage, orderBy = "popular", searchParams = {}) => {
+    return this.unsplash.photos.list({ page, perPage, orderBy, ...searchParams }).
       then(this.processResponse).
       then(({ response }) => response.results)
   }
 
-  searchPhotos = (query, page, perPage) => {
-    return this.unsplash.search.getPhotos({ query, page, perPage }).
+  searchPhotos = (query, page, perPage, searchParams = {}) => {
+    return this.unsplash.search.getPhotos({ query, page, perPage, ...searchParams }).
       then(this.processResponse).
       then(({ response }) => response)
   }
