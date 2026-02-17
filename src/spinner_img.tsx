@@ -1,19 +1,21 @@
 import React from "react"
 import Spinner from "./spinner"
-import propTypes from "prop-types"
-const { string, object } = propTypes
+
+interface SpinnerImgProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  src: string
+  style?: React.CSSProperties
+}
+
+interface SpinnerImgState {
+  loaded: boolean
+}
 
 const blank = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
 
-export default class SpinnerImg extends React.Component {
-  static propTypes = {
-    src: string.isRequired,
-    style: object,
-  }
+export default class SpinnerImg extends React.Component<SpinnerImgProps, SpinnerImgState> {
+  private img: HTMLImageElement | null = null
 
-  static defaultProps = { style: {} }
-
-  state = {
+  state: SpinnerImgState = {
     loaded: false,
   }
 
@@ -26,12 +28,14 @@ export default class SpinnerImg extends React.Component {
   }
 
   componentWillUnmount() {
-    this.img.onload = () => undefined
+    if (this.img) {
+      this.img.onload = () => undefined
+    }
   }
 
   render() {
     const { loaded } = this.state
-    const { src, style, ...rest } = this.props
+    const { src, style = {}, ...rest } = this.props
 
     return (
       <div className="p-r">
@@ -41,7 +45,7 @@ export default class SpinnerImg extends React.Component {
           className="unsplash-react__image"
           style={{
             ...style,
-            transition: `opacity .3s, ${style.transition}`,
+            transition: `opacity .3s, ${style.transition || ""}`,
             opacity: loaded ? 1 : 0,
           }}
         />

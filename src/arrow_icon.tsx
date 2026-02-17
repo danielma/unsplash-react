@@ -1,14 +1,16 @@
 import React from "react"
-import propTypes from "prop-types"
-const { number, object, string, oneOfType } = propTypes
 
-ArrowIcon.propTypes = {
-  width: oneOfType([number, string]),
-  height: oneOfType([number, string]),
-  style: object,
+interface ArrowIconProps {
+  width?: number | string
+  height?: number | string
+  style?: React.CSSProperties
 }
 
-export default function ArrowIcon({ width = 32, height = 32, style = {} }) {
+export default function ArrowIcon({
+  width = 32,
+  height = 32,
+  style = {},
+}: ArrowIconProps) {
   return (
     <svg width={width} height={height} style={style} viewBox="0 0 14 14">
       <g>
