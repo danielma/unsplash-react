@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.3 (2026-02-18)
+
+## What's Changed
+* fix(ci): upgrade to Node.js 24 for npm 11.5.1+ support by @danielma in https://github.com/danielma/unsplash-react/pull/46
+
+
+**Full Changelog**: https://github.com/danielma/unsplash-react/compare/v0.4.2...v0.4.3
+
 ## 0.4.2 (2026-02-18)
 
 ## What's Changed
