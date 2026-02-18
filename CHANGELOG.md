@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.2 (2026-02-18)
+
+## What's Changed
+* fix(ci): upgrade Node.js to version 22 for npm provenance support by @danielma in https://github.com/danielma/unsplash-react/pull/44
+
+
+**Full Changelog**: https://github.com/danielma/unsplash-react/compare/v0.4.1...v0.4.2
+
 ## 0.4.1 (2026-02-18)
 
 ## What's Changed
