@@ -39,8 +39,8 @@ export function throttle<T extends AnyFunction>(wait: number, func: T): T {
 export function withDefaultProps<P extends object, D extends Partial<P>>(
   Component: ComponentType<P>,
   defaultProps: D
-): ComponentType<Omit<P, keyof D> & Partial<D>> {
-  const WrappedComponent = (props: Omit<P, keyof D> & Partial<D>) => {
+): ComponentType<Omit<P, keyof D>> {
+  const WrappedComponent = (props: Omit<P, keyof D>) => {
     // Merge default props with provided props to create complete props
     const mergedProps = { ...defaultProps, ...props } as unknown as P
     return <Component {...mergedProps} />

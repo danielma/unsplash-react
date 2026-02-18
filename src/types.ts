@@ -54,7 +54,8 @@ export interface PreferredSize {
  * Handler called when an uploader finishes its work.
  * The response type varies by uploader implementation.
  */
-export type FinishedUploadingHandler<T = unknown> = (response?: T) => void
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type FinishedUploadingHandler<T = any> = (response?: T) => void
 
 /**
  * Function that downloads a photo and returns a fetch Response promise
@@ -89,6 +90,14 @@ export interface ExternalLocationUploaderProps extends UploaderProps {
   uploadUrl: string
   /** Form field name for the uploaded file */
   name: string
+}
+
+/**
+ * Props for Base64Uploader, which accepts HTML input attributes
+ */
+export interface Base64UploaderProps extends UploaderProps {
+  /** Form field name for the hidden input */
+  name?: string
 }
 
 /**

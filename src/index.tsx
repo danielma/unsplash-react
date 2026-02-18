@@ -461,6 +461,9 @@ export type {
   UploaderComponent,
   UploaderProps,
   FinishedUploadingHandler,
+  Base64UploaderProps,
+  BlobUploaderProps,
+  ExternalLocationUploaderProps,
 } from "./types"
 
 function CSSStyles() {

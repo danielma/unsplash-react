@@ -10,11 +10,14 @@ const pkg = JSON.parse(readFileSync("./package.json", "utf-8"))
 
 const env = process.env.NODE_ENV || "dev"
 const typescriptPlugin = typescript({
-  useTsconfigDeclarationDir: true,
   tsconfigOverride: {
     compilerOptions: {
       declaration: env === "production",
+      declarationDir: env === "production" ? "dist/types" : undefined,
+      rootDir: env === "production" ? "src" : ".",
     },
+    include: env === "production" ? ["src/**/*"] : ["src/**/*", "examples/**/*"],
+    exclude: ["node_modules", "dist"],
   },
 })
 const replaceEnvPlugin = replace({
@@ -52,7 +55,7 @@ if (env === "production") {
   ]
 } else {
   config = {
-    input: "examples/index.js",
+    input: "examples/index.tsx",
     output: {
       name: "UnsplashReactExample",
       file: "examples/build.js",
