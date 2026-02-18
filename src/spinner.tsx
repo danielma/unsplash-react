@@ -1,13 +1,31 @@
 import React from "react"
-import PropTypes from "prop-types"
 
-function speedSwitch(speed) {
+type SpinnerThickness = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+type SpinnerGap = 1 | 2 | 3 | 4 | 5
+type SpinnerSpeed = "fast" | "slow"
+
+interface SpinnerProps extends React.SVGProps<SVGSVGElement> {
+  color?: string
+  thickness?: SpinnerThickness
+  gap?: SpinnerGap
+  speed?: SpinnerSpeed
+  size?: string
+}
+
+function speedSwitch(speed?: SpinnerSpeed): number {
   if (speed === "fast") return 600
   if (speed === "slow") return 900
   return 750
 }
 
-const Spinner = ({ color, speed, gap, thickness, size, ...props }) => (
+const Spinner = ({
+  color = "rgba(0,0,0,0.4)",
+  speed,
+  gap = 4,
+  thickness = 4,
+  size = "1em",
+  ...props
+}: SpinnerProps) => (
   <svg
     height={size}
     width={size}
@@ -19,7 +37,7 @@ const Spinner = ({ color, speed, gap, thickness, size, ...props }) => (
     viewBox="0 0 32 32"
   >
     <title id="title">Circle loading spinner</title>
-    <desc id="desc">Image of a partial circle indicating "loading."</desc>
+    <desc id="desc">Image of a partial circle indicating &quot;loading.&quot;</desc>
     <style
       dangerouslySetInnerHTML={{
         __html: `
@@ -49,18 +67,5 @@ const Spinner = ({ color, speed, gap, thickness, size, ...props }) => (
     />
   </svg>
 )
-Spinner.propTypes = {
-  color: PropTypes.string,
-  thickness: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 7, 8]).isRequired,
-  gap: PropTypes.oneOf([1, 2, 3, 4, 5]).isRequired,
-  speed: PropTypes.oneOf(["fast", "slow"]),
-  size: PropTypes.string.isRequired,
-}
-Spinner.defaultProps = {
-  color: "rgba(0,0,0,0.4)",
-  gap: 4,
-  thickness: 4,
-  size: "1em",
-}
 
 export default Spinner

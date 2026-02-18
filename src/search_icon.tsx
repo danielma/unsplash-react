@@ -1,14 +1,16 @@
 import React from "react"
-import propTypes from "prop-types"
-const { number, object, string, oneOfType } = propTypes
 
-SearchIcon.propTypes = {
-  width: oneOfType([number, string]),
-  height: oneOfType([number, string]),
-  style: object,
+interface SearchIconProps {
+  width?: number | string
+  height?: number | string
+  style?: React.CSSProperties
 }
 
-export default function SearchIcon({ width = 32, height = 32, style = {} }) {
+export default function SearchIcon({
+  width = 32,
+  height = 32,
+  style = {},
+}: SearchIconProps) {
   return (
     <svg width={width} height={height} style={style} viewBox="0 0 16.7 16.7">
       <path

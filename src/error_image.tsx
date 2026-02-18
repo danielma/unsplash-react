@@ -1,14 +1,11 @@
 import React from "react"
-import propTypes from "prop-types"
-const { number, object, string, oneOfType } = propTypes
 
-ErrorImage.propTypes = {
-  width: oneOfType([number, string]),
-  height: oneOfType([number, string]),
-  style: object,
+interface ErrorImageProps {
+  width?: number | string
+  height?: number | string
 }
 
-export default function ErrorImage({ width = 143, height = 109 }) {
+export default function ErrorImage({ width = 143, height = 109 }: ErrorImageProps) {
   return (
     <svg width={width} height={height} viewBox="0 0 105.597 80.577">
       <g style={{ opacity: 0.6000000000000001 }}>
