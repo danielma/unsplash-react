@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1 (2026-02-18)
+
+## What's Changed
+* fix(ci): consolidate npm publish into release-please workflow by @danielma in https://github.com/danielma/unsplash-react/pull/42
+
+
+**Full Changelog**: https://github.com/danielma/unsplash-react/compare/v0.4.0...v0.4.1
+
 ## 0.4.0 (2026-02-18)
 
 ## What's Changed
