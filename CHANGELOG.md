@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.5 (2026-03-03)
+
+## What's Changed
+* fix(yarn): `npx yarn install` by @danielma in https://github.com/danielma/unsplash-react/pull/50
+
+
+**Full Changelog**: https://github.com/danielma/unsplash-react/compare/v0.4.4...v0.4.5
+
 ## 0.4.4 (2026-03-03)
 
 ## What's Changed
