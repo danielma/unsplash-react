@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.4 (2026-03-03)
+
+## What's Changed
+* fix: remove `.js` extension from cjs module by @edgartheunready in https://github.com/danielma/unsplash-react/pull/48
+
+## New Contributors
+* @edgartheunready made their first contribution in https://github.com/danielma/unsplash-react/pull/48
+
+**Full Changelog**: https://github.com/danielma/unsplash-react/compare/v0.4.3...v0.4.4
+
 ## 0.4.3 (2026-02-18)
 
 ## What's Changed
